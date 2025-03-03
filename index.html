@@ -4,35 +4,56 @@
   <meta charset="UTF-8">
   <title>Camp and Family Week Information</title>
   <style>
+    /* Global Styles */
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f0f0f0;
+      background-color: #f4f4f4;
+      color: #333;
     }
-    h1, h2 {
+    /* Header Section */
+    header {
+      background-color: #003366;
+      color: #fff;
+      padding: 20px 0;
       text-align: center;
     }
-    table {
-      border-collapse: collapse;
+    /* Container for Content */
+    .container {
       width: 90%;
+      max-width: 1200px;
       margin: 20px auto;
+      padding: 20px;
       background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    /* Section Headings */
+    h2 {
+      text-align: center;
+      color: #003366;
+      margin-top: 40px;
+    }
+    /* Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
     }
     th, td {
       border: 1px solid #ddd;
-      padding: 8px;
+      padding: 12px;
       text-align: left;
       vertical-align: top;
     }
     th {
-      background-color: #e0e0e0;
+      background-color: #0055a5;
+      color: #fff;
     }
     tr:nth-child(even) {
       background-color: #f9f9f9;
     }
     a {
-      color: blue;
+      color: #0055a5;
       text-decoration: none;
     }
     a:hover {
@@ -41,140 +62,233 @@
   </style>
 </head>
 <body>
-  <h1>Camp and Family Week Information</h1>
+  <header>
+    <h1>Camp and Family Week Information</h1>
+  </header>
   
-  <h2>South Carolina Camps</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Camp Name</th>
-        <th>Dates</th>
-        <th>Location</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>CODA Allowed</th>
-        <th>Cost</th>
-        <th>Website</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Camp Sertoma SC</td>
-        <td>Not specified</td>
-        <td>Clemson University’s Outdoor Lab</td>
-        <td>Provides summer camp experiences for children in partnership with Clemson Univ.</td>
-        <td>Not specified</td>
-        <td>Not specified</td>
-        <td>Not specified</td>
-        <td><a href="https://campsertomasc.com" target="_blank">campsertomasc.com</a></td>
-      </tr>
-      <tr>
-        <td>Camp Wonder Hands</td>
-        <td>June 16 - June 20, 2025</td>
-        <td>Camp Cole, Eastover, SC</td>
-        <td>Weeklong overnight camp for deaf/hard-of-hearing children.</td>
-        <td>Overnight camp</td>
-        <td>Only for SC deaf/hard-of-hearing (7-17)</td>
-        <td>Not specified</td>
-        <td><a href="https://www.campcole.org/campwonderhands/" target="_blank">campcole.org</a></td>
-      </tr>
-      <tr>
-        <td>Camp Burnt Gin</td>
-        <td>June 4 - July 19, 2025 (Various Sessions)</td>
-        <td>Not specified</td>
-        <td>
-          Multiple sessions for different age groups, including a session for blood disorders:<br>
-          - Session 1 (Young Adults, 21-25): June 4 – June 7<br>
-          - Session 2 (Children, 7-15): June 11 – June 16<br>
-          - Session 3 (Teens, 16-20): June 20 – June 25<br>
-          - Session 4 (Children, 7-17): June 28 – July 1<br>
-          - Session 5 (PRISMA Health Partnership, 7-15): July 7 – July 12<br>
-          - Session 6 (Children, 7-17): July 16 – July 19
-        </td>
-        <td>Overnight camp</td>
-        <td>Not specified</td>
-        <td>Not specified</td>
-        <td><a href="https://dph.sc.gov/health-wellness/child-teen-health/camp-burnt-gin/camp-burnt-gin-programs" target="_blank">dph.sc.gov</a></td>
-      </tr>
-      <tr>
-        <td>Koala Camp</td>
-        <td>May 6 - May 22, 2025 (Tue & Thu)</td>
-        <td>Columbia College, SC</td>
-        <td>Mini-camp for children (18 months-3 yrs) with speech/language delays, ASL focus.</td>
-        <td>Day camp</td>
-        <td>Not specified</td>
-        <td>Free (scholarships)</td>
-        <td><a href="https://docs.google.com/forms/d/e/1FAIpQLScTBscXYG24F0rnBe-bo9MtkXKfqt5TdWK-DdDvdIcCyHXs0Q/viewform?" target="_blank">docs.google.com</a></td>
-      </tr>
-      <tr>
-        <td>Hornet Spy Summer Camp</td>
-        <td>June 2 - June 7, 2025</td>
-        <td>SCSDB Campus</td>
-        <td>Interactive educational camp with team-building, outdoor, and tech workshops.</td>
-        <td>Day & Residential options</td>
-        <td>Not specified</td>
-        <td>Not specified</td>
-        <td><a href="https://www.scsdb.org/summer-camp" target="_blank">scsdb.org</a></td>
-      </tr>
-      <tr>
-        <td>Camp Ichthus</td>
-        <td>TBD</td>
-        <td>Not specified</td>
-        <td>Not specified</td>
-        <td>Not specified</td>
-        <td>Not specified</td>
-        <td>Not specified</td>
-        <td><a href="https://www.scbcdeaf.org" target="_blank">scbcdeaf.org</a></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <h2>Holley Institute Family Week</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Week</th>
-        <th>Dates</th>
-        <th>Ages</th>
-        <th>Topic</th>
-        <th>Presenter Needed?</th>
-        <th>Location</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Week One</td>
-        <td>June 29 - July 4</td>
-        <td>0-7</td>
-        <td>ASL Literacy and Deaf Culture</td>
-        <td>No</td>
-        <td>Holley Institute, Carls Family Village, Brooklyn, MI</td>
-      </tr>
-      <tr>
-        <td>Week Two</td>
-        <td>July 6 - 11</td>
-        <td>0-7</td>
-        <td>Laws/Civil Rights for DDBHH Children</td>
-        <td>Yes</td>
-        <td>Holley Institute, Carls Family Village, Brooklyn, MI</td>
-      </tr>
-      <tr>
-        <td>Week Three</td>
-        <td>July 13 - 18</td>
-        <td>8-15</td>
-        <td>Mental Health/Identity for DDBHH Children</td>
-        <td>No</td>
-        <td>Holley Institute, Carls Family Village, Brooklyn, MI</td>
-      </tr>
-      <tr>
-        <td>Week Four</td>
-        <td>July 20 - 25</td>
-        <td>0-17</td>
-        <td>Building Family Identity/Raising CODA</td>
-        <td>Yes</td>
-        <td>Holley Institute, Carls Family Village, Brooklyn, MI</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="container">
+    <!-- ==================== SOUTH CAROLINA CAMPS ==================== -->
+    <h2>South Carolina Camps</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Camp Name</th>
+          <th>Dates</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>CODA Allowed</th>
+          <th>Cost</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Camp Sertoma SC</td>
+          <td>Not specified</td>
+          <td>Clemson University’s Outdoor Lab</td>
+          <td>Provides summer camp experiences for children in partnership with Clemson Univ.</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td><a href="https://campsertomasc.com" target="_blank">campsertomasc.com</a></td>
+        </tr>
+        <tr>
+          <td>Camp Wonder Hands</td>
+          <td>June 16 - June 20, 2025</td>
+          <td>Camp Cole, Eastover, SC</td>
+          <td>Weeklong overnight camp for deaf/hard-of-hearing children.</td>
+          <td>Overnight camp</td>
+          <td>Only for SC deaf/hard-of-hearing (7-17)</td>
+          <td>Not specified</td>
+          <td><a href="https://www.campcole.org/campwonderhands/" target="_blank">campcole.org</a></td>
+        </tr>
+        <tr>
+          <td>Camp Burnt Gin</td>
+          <td>June 4 - July 19, 2025 (Various Sessions)</td>
+          <td>Not specified</td>
+          <td>
+            Multiple sessions for different age groups, including a session for blood disorders:<br>
+            - Session 1 (Young Adults, 21-25): June 4 – June 7<br>
+            - Session 2 (Children, 7-15): June 11 – June 16<br>
+            - Session 3 (Teens, 16-20): June 20 – June 25<br>
+            - Session 4 (Children, 7-17): June 28 – July 1<br>
+            - Session 5 (PRISMA Health Partnership, 7-15): July 7 – July 12<br>
+            - Session 6 (Children, 7-17): July 16 – July 19
+          </td>
+          <td>Overnight camp</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td><a href="https://dph.sc.gov/health-wellness/child-teen-health/camp-burnt-gin/camp-burnt-gin-programs" target="_blank">dph.sc.gov</a></td>
+        </tr>
+        <tr>
+          <td>Koala Camp</td>
+          <td>May 6 - May 22, 2025 (Tue & Thu)</td>
+          <td>Columbia College, SC</td>
+          <td>Mini-camp for children (18 months-3 yrs) with speech/language delays, ASL focus.</td>
+          <td>Day camp</td>
+          <td>Not specified</td>
+          <td>Free (scholarships)</td>
+          <td><a href="https://docs.google.com/forms/d/e/1FAIpQLScTBscXYG24F0rnBe-bo9MtkXKfqt5TdWK-DdDvdIcCyHXs0Q/viewform?" target="_blank">docs.google.com</a></td>
+        </tr>
+        <tr>
+          <td>Hornet Spy Summer Camp</td>
+          <td>June 2 - June 7, 2025</td>
+          <td>SCSDB Campus</td>
+          <td>Interactive educational camp with team-building, outdoor, and tech workshops.</td>
+          <td>Day & Residential options</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td><a href="https://www.scsdb.org/summer-camp" target="_blank">scsdb.org</a></td>
+        </tr>
+        <tr>
+          <td>Camp Ichthus</td>
+          <td>TBD</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td><a href="https://www.scbcdeaf.org" target="_blank">scbcdeaf.org</a></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- ==================== OHIO CAMPS ==================== -->
+    <h2>Ohio Camps</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Camp Name</th>
+          <th>Dates</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>CODA Allowed</th>
+          <th>Cost</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OSD Adventure Day Camp</td>
+          <td>Not specified</td>
+          <td>Ohio School for the Deaf (OSD)</td>
+          <td>
+            Currently split into two groups:
+            <ul>
+              <li>4th–8th grade (Deaf/Hard of Hearing)</li>
+              <li>3rd–5th grade (Hearing peers; limited spots)</li>
+            </ul>
+            <strong>Contact:</strong><br>
+            VP: 614-728-5460<br>
+            Text: 614-806-6219<br>
+            Email: <a href="mailto:osdsummercamps@osdb.oh.gov">osdsummercamps@osdb.oh.gov</a>
+          </td>
+          <td>Day Camp</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>
+            <strong>Registration:</strong><br>
+            Deaf/Hard of Hearing: 
+            <a href="https://form.jotform.com/252003718107144" target="_blank">Click Here</a><br>
+            Hearing Peers: 
+            <a href="https://form.jotform.com/252003718107144" target="_blank">Click Here</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- ==================== NEW YORK CAMPS ==================== -->
+    <h2>New York Camps</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Camp Name</th>
+          <th>Dates</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>CODA Allowed</th>
+          <th>Cost</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Camp Mark Seven (CM7 Deaf Camp)</td>
+          <td>Multiple Sessions (May 30 - Sept 21, 2025)</td>
+          <td>Old Forge, NY</td>
+          <td>
+            <strong>2025 Schedule:</strong><br>
+            • Opening Weekend: May 30 – June 3<br>
+            • Deaf Camp Youth (Ages 9–12): June 3 – 7<br>
+            • Deaf Camp Teen (Ages 13–16): July 6 – 18<br>
+            • KODA Camp Youth (Ages 9–12): July 20 – Aug 1<br>
+            • KODA Camp Teen (Ages 13–16): Aug 3 – 15<br>
+            • Deaf Adults & Bible Week: Aug 17 – 23<br>
+            • ASL Immersion Week: Aug 24 – 31<br>
+            • Adult CODA Retreat: Sept 18 – 21
+          </td>
+          <td>Overnight camp</td>
+          <td>Yes (KODA sessions)</td>
+          <td>Not specified</td>
+          <td>
+            <a href="https://campmark7.org" target="_blank">campmark7.org</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- ==================== MICHIGAN: HOLLEY INSTITUTE FAMILY WEEK ==================== -->
+    <h2>Holley Institute Family Week (Michigan)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Dates</th>
+          <th>Ages</th>
+          <th>Topic</th>
+          <th>Presenter Needed?</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Week One</td>
+          <td>June 29 - July 4</td>
+          <td>0-7</td>
+          <td>ASL Literacy and Deaf Culture</td>
+          <td>No</td>
+          <td>Holley Institute, Carls Family Village, Brooklyn, MI</td>
+        </tr>
+        <tr>
+          <td>Week Two</td>
+          <td>July 6 - 11</td>
+          <td>0-7</td>
+          <td>Laws/Civil Rights for DDBHH Children</td>
+          <td>Yes</td>
+          <td>Holley Institute, Carls Family Village, Brooklyn, MI</td>
+        </tr>
+        <tr>
+          <td>Week Three</td>
+          <td>July 13 - 18</td>
+          <td>8-15</td>
+          <td>Mental Health/Identity for DDBHH Children</td>
+          <td>No</td>
+          <td>Holley Institute, Carls Family Village, Brooklyn, MI</td>
+        </tr>
+        <tr>
+          <td>Week Four</td>
+          <td>July 20 - 25</td>
+          <td>0-17</td>
+          <td>Building Family Identity/Raising CODA</td>
+          <td>Yes</td>
+          <td>Holley Institute, Carls Family Village, Brooklyn, MI</td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
 </body>
 </html>
