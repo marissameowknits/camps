@@ -120,21 +120,21 @@
                 const json = JSON.parse(text.substring(47, text.length - 2)); // Clean Google Sheets response
 
                 const campData = json.table.rows.map(row => {
-                    return row.c.map(cell => (cell ? cell.v : ""));
+                    return row.c.map(cell => (cell ? cell.v : "")); // Ensure no undefined values
                 });
 
                 const states = {};
-                
+
                 // Group camps by state
                 campData.forEach(camp => {
-                    const state = camp[1] || "Other"; // Assuming state is in column 2
+                    const state = camp[8] ? camp[8].trim() : "Other"; // Assuming state is in column 9
                     if (!states[state]) states[state] = [];
                     states[state].push(camp);
                 });
 
                 const container = document.getElementById("campContainer");
                 container.innerHTML = ""; // Clear existing content
-                
+
                 Object.keys(states).forEach(state => {
                     const section = document.createElement("div");
                     section.className = "camp-section";
@@ -165,7 +165,7 @@
                                     <td>${camp[4]}</td>
                                     <td>${camp[5]}</td>
                                     <td>${camp[6]}</td>
-                                    <td><a href="${camp[10]}" target="_blank">Visit</a></td>
+                                    <td>${camp[7] ? `<a href="${camp[7]}" target="_blank">Visit</a>` : "N/A"}</td>
                                 </tr>
                             `)
                             .join("")}
