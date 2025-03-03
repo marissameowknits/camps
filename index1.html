@@ -127,7 +127,7 @@
                 
                 // Group camps by state
                 campData.forEach(camp => {
-                    const state = camp[1] || "Other"; // Assuming state is in column 2
+                    const state = camp[0] || "Other"; // Assuming state is in column 2
                     if (!states[state]) states[state] = [];
                     states[state].push(camp);
                 });
