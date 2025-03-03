@@ -1,0 +1,28 @@
+<script>
+    function loadCamps() {
+        fetch("https://docs.google.com/spreadsheets/d/1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q/gviz/tq?tqx=out:json")
+        .then(response => response.text())
+        .then(data => {
+            const json = JSON.parse(data.substring(47, data.length - 2));
+            const tableBody = document.querySelector("#campTable tbody");
+            tableBody.innerHTML = "";
+            
+            json.table.rows.forEach(row => {
+                let cells = row.c.map(cell => cell ? cell.v : "");
+                const rowHTML = `<tr>
+                    <td>${cells[0]}</td>
+                    <td>${cells[1]}</td>
+                    <td>${cells[2]}</td>
+                    <td>${cells[3]}</td>
+                    <td>${cells[4]}</td>
+                    <td>${cells[5]}</td>
+                    <td>${cells[6]}</td>
+                    <td><a href="${cells[7]}" target="_blank">Visit</a></td>
+                </tr>`;
+                tableBody.innerHTML += rowHTML;
+            });
+        });
+    }
+
+    loadCamps();
+</script>
