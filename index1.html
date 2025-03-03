@@ -33,10 +33,21 @@
         }
 
         /* Table Styles */
+        .camp-section {
+            max-width: 1200px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        .camp-section h2 {
+            background-color: #0055a5;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
         table {
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
             border-collapse: collapse;
             background-color: #fff;
             border-radius: 10px;
@@ -96,21 +107,7 @@
         <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
     </div>
 
-    <table id="campTable">
-        <thead>
-            <tr>
-                <th>Camp Name</th>
-                <th>Dates</th>
-                <th>Location</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>CODA Allowed</th>
-                <th>Cost</th>
-                <th>Website</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div id="campContainer"></div>
 
     <script>
         async function loadCamps() {
@@ -121,24 +118,64 @@
                 const response = await fetch(url);
                 const text = await response.text();
                 const json = JSON.parse(text.substring(47, text.length - 2)); // Clean Google Sheets response
-                
-                const tableBody = document.querySelector("#campTable tbody");
-                tableBody.innerHTML = ""; // Clear existing table
-                
-                json.table.rows.forEach(row => {
-                    let cells = row.c.map(cell => (cell ? cell.v : "")); // Extract cell values
-                    const rowHTML = `<tr>
-                        <td>${cells[0]}</td>
-                        <td>${cells[1]}</td>
-                        <td>${cells[2]}</td>
-                        <td>${cells[3]}</td>
-                        <td>${cells[4]}</td>
-                        <td>${cells[5]}</td>
-                        <td>${cells[6]}</td>
-                        <td><a href="${cells[7]}" target="_blank">Visit</a></td>
-                    </tr>`;
-                    tableBody.innerHTML += rowHTML;
+
+                const campData = json.table.rows.map(row => {
+                    return row.c.map(cell => (cell ? cell.v : ""));
                 });
+
+                const states = {};
+                
+                // Group camps by state
+                campData.forEach(camp => {
+                    const state = camp[8] || "Other"; // Assuming state is in column 9
+                    if (!states[state]) states[state] = [];
+                    states[state].push(camp);
+                });
+
+                const container = document.getElementById("campContainer");
+                container.innerHTML = ""; // Clear existing content
+                
+                Object.keys(states).forEach(state => {
+                    const section = document.createElement("div");
+                    section.className = "camp-section";
+                    section.innerHTML = `<h2>${state} Camps</h2>`;
+
+                    const table = document.createElement("table");
+                    table.innerHTML = `
+                        <thead>
+                            <tr>
+                                <th>Camp Name</th>
+                                <th>Dates</th>
+                                <th>Location</th>
+                                <th>Description</th>
+                                <th>Type</th>
+                                <th>CODA Allowed</th>
+                                <th>Cost</th>
+                                <th>Website</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        ${states[state]
+                            .map(camp => `
+                                <tr>
+                                    <td>${camp[0]}</td>
+                                    <td>${camp[1]}</td>
+                                    <td>${camp[2]}</td>
+                                    <td>${camp[3]}</td>
+                                    <td>${camp[4]}</td>
+                                    <td>${camp[5]}</td>
+                                    <td>${camp[6]}</td>
+                                    <td><a href="${camp[7]}" target="_blank">Visit</a></td>
+                                </tr>
+                            `)
+                            .join("")}
+                        </tbody>
+                    `;
+
+                    section.appendChild(table);
+                    container.appendChild(section);
+                });
+
             } catch (error) {
                 console.error("Error loading data:", error);
             }
@@ -146,7 +183,7 @@
 
         function searchCamps() {
             const input = document.getElementById("searchBox").value.toLowerCase();
-            const rows = document.querySelectorAll("#campTable tbody tr");
+            const rows = document.querySelectorAll("#campContainer table tbody tr");
 
             rows.forEach(row => {
                 const text = row.innerText.toLowerCase();
