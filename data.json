@@ -1,0 +1,23 @@
+[
+  {
+    "campName": "Camp Sertoma SC",
+    "dates": "Not specified",
+    "location": "Clemson University’s Outdoor Lab",
+    "description": "Provides summer camp experiences for children in partnership with Clemson Univ.",
+    "type": "Not specified",
+    "codaAllowed": "Not specified",
+    "cost": "Not specified",
+    "website": "https://campsertomasc.com"
+  },
+  {
+    "campName": "Camp Wonder Hands",
+    "dates": "June 16 - June 20, 2025",
+    "location": "Camp Cole, Eastover, SC",
+    "description": "Weeklong overnight camp for deaf/hard-of-hearing children.",
+    "type": "Overnight camp",
+    "codaAllowed": "Only for SC deaf/hard-of-hearing (7-17)",
+    "cost": "Not specified",
+    "website": "https://www.campcole.org/campwonderhands/"
+  }
+  // Add more entries as needed...
+]
