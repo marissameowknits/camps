@@ -64,7 +64,7 @@
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const text = await response.text();
-        const json = JSON.parse(text.substring(48, text.length - 2));
+        const json = JSON.parse(text.substring(47, text.length - 2));
         // Map each row to an array of cell values; if a cell is missing, use an empty string.
         const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
         console.log("Loaded Camp Data:", campData); // Debug: Check data in console
