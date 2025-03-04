@@ -4,122 +4,154 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camp List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body { 
       font-family: Arial, sans-serif; 
-      margin: 20px; 
-      background-color: #f8f9fa; 
-      color: #333; 
-      text-align: center; 
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0055a5, #003f7f);
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
     }
-    h1 { color: #0055a5; }
-    .search-container { margin-bottom: 20px; }
-    input[type="text"] {
-      width: 50%;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    table {
+    .navbar {
       width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      border-collapse: collapse;
-      background-color: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      backdrop-filter: blur(10px);
     }
-    th, td {
+    input[type="text"] {
+      width: 80%;
+      max-width: 400px;
       padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      outline: none;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      text-align: center;
     }
-    th { background-color: #0055a5; color: white; }
-    tr:nth-child(even) { background-color: #f2f2f2; }
-    tr:hover { background-color: #e1f5fe; }
-    a { color: #007bff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    @media (max-width: 768px) {
-      input[type="text"] { width: 80%; }
-      table { font-size: 14px; }
-      th, td { padding: 8px; }
+    #campContainer {
+      max-height: 75vh;
+      overflow-y: auto;
+      width: 90%;
+      margin-top: 80px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .camp-card {
+      background: #fff;
+      color: #333;
+      width: 90%;
+      max-width: 300px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      text-align: left;
+    }
+    .camp-card h3 {
+      margin: 0;
+      color: #0055a5;
+    }
+    .camp-card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #0055a5;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .camp-card a:hover {
+      background: #003f7f;
+    }
+    #loading {
+      margin-top: 100px;
+      font-size: 18px;
+      color: #fff;
+    }
+    #errorMessage {
+      display: none;
+      color: red;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>Camp List</h1>
-  <div class="search-container">
+
+  <div class="navbar">
     <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
   </div>
+  
+  <div id="loading">Loading camps...</div>
+  <p id="errorMessage">Failed to load camp data. <button onclick="fetchCamps()">Retry</button></p>
+  
   <div id="campContainer"></div>
-  <script>
-    async function loadCamps() {
-      const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";  
-      const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const text = await response.text();
-        const json = JSON.parse(text.substring(50, text.length - 2));
-        // Map each row to an array of cell values; if a cell is missing, use an empty string.
-        const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
-        console.log("Loaded Camp Data:", campData); // Debug: Check data in console
 
-        // Build a single table with all camps; we assume the following column order:
-        // 0: Camp Name, 1: State, 2: Dates, 3: Location, 4: Description, 
-        // 5: Type, 6: CODA Allowed, 7: Cost, 8: Website
-        const container = document.getElementById("campContainer");
-        container.innerHTML = `
-          <table>
-            <thead>
-              <tr>
-                <th>Camp Name</th>
-                <th>State</th>
-                <th>Dates</th>
-                <th>Location</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>CODA Allowed</th>
-                <th>Cost</th>
-                <th>Website</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${campData.map(camp => `
-                <tr>
-                  <td>${camp[1]}</td>
-                  <td>${camp[2]}</td>
-                  <td>${camp[3]}</td>
-                  <td>${camp[4]}</td>
-                  <td>${camp[5]}</td>
-                  <td>${camp[6]}</td>
-                  <td>${camp[7]}</td>
-                  <td>${camp[8]}</td>
-                  <td>${camp[9] ? `<a href="${camp[9].startsWith("http") ? camp[9] : "https://" + camp[9]}" target="_blank">Visit</a>` : "N/A"}</td>
-                </tr>
-              `).join("")}
-            </tbody>
-          </table>
-        `;
+  <script>
+    async function fetchCamps() {
+      document.getElementById("loading").style.display = "block";
+      document.getElementById("errorMessage").style.display = "none";
+      try {
+        const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";
+        const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Failed to load data');
+        const text = await response.text();
+        const json = JSON.parse(text.substring(47, text.length - 2));
+        
+        const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
+        displayCamps(campData);
       } catch (error) {
         console.error("Error loading data:", error);
+        document.getElementById("errorMessage").style.display = "block";
+      } finally {
+        document.getElementById("loading").style.display = "none";
       }
+    }
+ 
+    function displayCamps(camps) {
+      const container = document.getElementById("campContainer");
+      container.innerHTML = camps.map(camp => {
+        const link = camp[8] ? (camp[8].startsWith("http") ? camp[8] : "https://" + camp[8]) : "";
+        return `
+          <div class="camp-card">
+            <h3>${camp[0]}</h3>
+            <p><i class="fas fa-map-marker-alt"></i> ${camp[1]}</p>
+            <p><i class="fas fa-calendar"></i> ${camp[2]}</p>
+            <p><i class="fas fa-location-arrow"></i> ${camp[3]}</p>
+            <p><i class="fas fa-info-circle"></i> ${camp[4]}</p>
+            <p><i class="fas fa-users"></i> Type: ${camp[5]}</p>
+            <p><i class="fas fa-check-circle"></i> CODA Allowed: ${camp[6]}</p>
+            <p><i class="fas fa-dollar-sign"></i> Cost: ${camp[7]}</p>
+            ${link ? `<a href="${link}" target="_blank">Visit Website</a>` : "N/A"}
+          </div>
+        `;
+      }).join("");
     }
 
     function searchCamps() {
       const input = document.getElementById("searchBox").value.toLowerCase();
-      const rows = document.querySelectorAll("#campContainer table tbody tr");
-      rows.forEach(row => {
-        const text = row.innerText.toLowerCase();
-        row.style.display = text.includes(input) ? "" : "none";
+      const cards = document.querySelectorAll(".camp-card");
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(input) ? "block" : "none";
       });
     }
 
-    loadCamps();
+    fetchCamps();
   </script>
+
 </body>
 </html>
