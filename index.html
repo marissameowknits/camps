@@ -17,7 +17,7 @@ async function loadCamps() {
 
         // Group camps by state
         campData.forEach(camp => {
-            const state = camp[8] ? camp[8].trim() : "Other";  
+            const state = camp[2] ? camp[2].trim() : "Other";  
             if (!states[state]) states[state] = [];
             states[state].push(camp);
         });
@@ -35,6 +35,7 @@ async function loadCamps() {
                 <thead>
                     <tr>
                         <th>Camp Name</th>
+                        <th>State</th>
                         <th>Dates</th>
                         <th>Location</th>
                         <th>Description</th>
@@ -55,7 +56,8 @@ async function loadCamps() {
                             <td>${camp[4]}</td>
                             <td>${camp[5]}</td>
                             <td>${camp[6]}</td>
-                            <td>${camp[7] ? `<a href="${camp[7].startsWith("http") ? camp[7] : "https://" + camp[7]}" target="_blank">Visit</a>` : "N/A"}</td>
+                            <td>${camp[7]}</td>
+                            <td>${camp[8] ? `<a href="${camp[7].startsWith("http") ? camp[7] : "https://" + camp[7]}" target="_blank">Visit</a>` : "N/A"}</td>
                         </tr>
                     `)
                     .join("")}
