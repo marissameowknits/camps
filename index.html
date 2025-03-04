@@ -13,8 +13,6 @@ async function loadCamps() {
         const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : ""))); 
         console.log("Loaded Camp Data:", campData); // Debugging - Check Console for Data
 
-        const states = {};
-
         const container = document.getElementById("campContainer");
         container.innerHTML = "";
 
@@ -35,8 +33,7 @@ async function loadCamps() {
                     </tr>
                 </thead>
                 <tbody>
-                ${states[state]
-                    .map(camp => `
+                
                         <tr>
                             <td>${camp[0]}</td>
                             <td>${camp[1]}</td>
