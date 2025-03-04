@@ -1,23 +1,174 @@
-[
-  {
-    "campName": "Camp Sertoma SC",
-    "dates": "Not specified",
-    "location": "Clemson University’s Outdoor Lab",
-    "description": "Provides summer camp experiences for children in partnership with Clemson Univ.",
-    "type": "Not specified",
-    "codaAllowed": "Not specified",
-    "cost": "Not specified",
-    "website": "https://campsertomasc.com"
-  },
-  {
-    "campName": "Camp Wonder Hands",
-    "dates": "June 16 - June 20, 2025",
-    "location": "Camp Cole, Eastover, SC",
-    "description": "Weeklong overnight camp for deaf/hard-of-hearing children.",
-    "type": "Overnight camp",
-    "codaAllowed": "Only for SC deaf/hard-of-hearing (7-17)",
-    "cost": "Not specified",
-    "website": "https://www.campcole.org/campwonderhands/"
-  }
-  // Add more entries as needed...
-]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camp List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #004aad, #002b5e);
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+    .navbar {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    input[type="text"] {
+      width: 80%;
+      max-width: 400px;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      outline: none;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+    #campContainer {
+      max-height: 75vh;
+      overflow-y: auto;
+      width: 90%;
+      margin-top: 100px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding-bottom: 20px;
+    }
+    .camp-card {
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      width: 90%;
+      max-width: 320px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+      text-align: left;
+      transition: transform 0.3s;
+    }
+    .camp-card:hover {
+      transform: scale(1.05);
+    }
+    .camp-card h3 {
+      margin: 0 0 10px 0;
+      color: #004aad;
+      font-size: 20px;
+    }
+    .camp-card p {
+      font-size: 14px;
+      margin: 5px 0;
+    }
+    .camp-card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #004aad;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .camp-card a:hover {
+      background: #002b5e;
+    }
+    #loading {
+      margin-top: 100px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+    }
+    #errorMessage {
+      display: none;
+      color: red;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
+  </div>
+  
+  <div id="loading">Loading camps...</div>
+  <p id="errorMessage">Failed to load camp data. <button onclick="fetchCamps()">Retry</button></p>
+  
+  <div id="campContainer"></div>
+
+  <script>
+    async function fetchCamps() {
+      document.getElementById("loading").style.display = "block";
+      document.getElementById("errorMessage").style.display = "none";
+
+      try {
+        const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";
+        const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&tq=&gid=0`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Failed to load data");
+
+        const text = await response.text();
+        const jsonStart = text.indexOf("{");
+        const json = JSON.parse(text.substring(jsonStart, text.length - 2));
+
+        const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
+        displayCamps(campData);
+      } catch (error) {
+        console.error("Error loading data:", error);
+        document.getElementById("errorMessage").style.display = "block";
+      } finally {
+        document.getElementById("loading").style.display = "none";
+      }
+    }
+ 
+    function displayCamps(camps) {
+      const container = document.getElementById("campContainer");
+      container.innerHTML = camps.map(camp => {
+        const link = camp[8] ? (camp[8].startsWith("http") ? camp[8] : "https://" + camp[8]) : "";
+        return `
+          <div class="camp-card">
+            <h3>${camp[0]}</h3>
+            <p><i class="fas fa-map-marker-alt"></i> ${camp[1]}</p>
+            <p><i class="fas fa-calendar"></i> ${camp[2]}</p>
+            <p><i class="fas fa-location-arrow"></i> ${camp[3]}</p>
+            <p><i class="fas fa-info-circle"></i> ${camp[4]}</p>
+            <p><i class="fas fa-users"></i> Type: ${camp[5]}</p>
+            <p><i class="fas fa-check-circle"></i> CODA Allowed: ${camp[6]}</p>
+            <p><i class="fas fa-dollar-sign"></i> Cost: ${camp[7]}</p>
+            ${link ? `<a href="${link}" target="_blank">Visit Website</a>` : "N/A"}
+          </div>
+        `;
+      }).join("");
+    }
+
+    function searchCamps() {
+      const input = document.getElementById("searchBox").value.toLowerCase();
+      const cards = document.querySelectorAll(".camp-card");
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(input) ? "block" : "none";
+      });
+    }
+
+    fetchCamps();
+  </script>
+
+</body>
+</html>
