@@ -55,7 +55,7 @@ async function loadCamps() {
                             <td>${camp[4]}</td>
                             <td>${camp[5]}</td>
                             <td>${camp[6]}</td>
-                            <td>${camp[7] ? `<a href="${camp[7].startsWith("http") ? camp[7] : "https://" + camp[7]}" target="_blank">Visit</a>` : "N/A"}</td>
+                            <td>${camp[7] ? `<a href="${camp[7].startsWith("https") ? camp[7] : "https://" + camp[7]}" target="_blank">Visit</a>` : "N/A"}</td>
                         </tr>
                     `)
                     .join("")}
