@@ -6,6 +6,8 @@
   <title>Camp List</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    
     body { 
       font-family: 'Poppins', sans-serif; 
       margin: 0;
@@ -28,7 +30,7 @@
       display: flex;
       justify-content: center;
       backdrop-filter: blur(10px);
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     }
     input[type="text"] {
       width: 80%;
@@ -53,33 +55,36 @@
       padding-bottom: 20px;
     }
     .camp-card {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       color: #333;
       width: 90%;
-      max-width: 320px;
+      max-width: 340px;
       padding: 20px;
       border-radius: 15px;
-      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
       text-align: left;
-      transition: transform 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
     .camp-card:hover {
       transform: scale(1.05);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
     }
     .camp-card h3 {
       margin: 0 0 10px 0;
       color: #004aad;
-      font-size: 20px;
+      font-size: 22px;
+      font-weight: 600;
     }
     .camp-card p {
       font-size: 14px;
       margin: 5px 0;
+      line-height: 1.5;
     }
     .camp-card a {
       display: inline-block;
       margin-top: 10px;
       padding: 10px 15px;
-      background: #004aad;
+      background: linear-gradient(135deg, #004aad, #002b5e);
       color: #fff;
       border-radius: 8px;
       text-decoration: none;
@@ -87,7 +92,7 @@
       transition: background 0.3s;
     }
     .camp-card a:hover {
-      background: #002b5e;
+      background: linear-gradient(135deg, #002b5e, #001a3a);
     }
     #loading {
       margin-top: 100px;
@@ -137,36 +142,6 @@
         document.getElementById("loading").style.display = "none";
       }
     }
- 
-    function displayCamps(camps) {
-      const container = document.getElementById("campContainer");
-      container.innerHTML = camps.map(camp => {
-        const link = camp[8] ? (camp[8].startsWith("http") ? camp[8] : "https://" + camp[8]) : "";
-        return `
-          <div class="camp-card">
-            <h3>${camp[0]}</h3>
-            <p><i class="fas fa-map-marker-alt"></i> ${camp[1]}</p>
-            <p><i class="fas fa-calendar"></i> ${camp[2]}</p>
-            <p><i class="fas fa-location-arrow"></i> ${camp[3]}</p>
-            <p><i class="fas fa-info-circle"></i> ${camp[4]}</p>
-            <p><i class="fas fa-users"></i> Type: ${camp[5]}</p>
-            <p><i class="fas fa-check-circle"></i> CODA Allowed: ${camp[6]}</p>
-            <p><i class="fas fa-dollar-sign"></i> Cost: ${camp[7]}</p>
-            ${link ? `<a href="${link}" target="_blank">Visit Website</a>` : "N/A"}
-          </div>
-        `;
-      }).join("");
-    }
-
-    function searchCamps() {
-      const input = document.getElementById("searchBox").value.toLowerCase();
-      const cards = document.querySelectorAll(".camp-card");
-      cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(input) ? "block" : "none";
-      });
-    }
-
     fetchCamps();
   </script>
 
