@@ -1,39 +1,164 @@
-<!-- ==================== SOUTH CAROLINA CAMPS ==================== -->
-<h2>South Carolina Camps</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Camp Name</th>
-      <th>Dates</th>
-      <th>Location</th>
-      <th>Description</th>
-      <th>Type</th>
-      <th>CODA Allowed</th>
-      <th>Cost</th>
-      <th>Website</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Koala Camp -->
-    <tr>
-      <td>Koala Camp</td>
-      <td>
-        Week 1: May 6 & 8, 2025<br>
-        Week 2: May 13 & 15, 2025<br>
-        Week 3: May 20 & 22, 2025
-      </td>
-      <td>Columbia College, SC</td>
-      <td>
-        Interactive ASL mini-camp for children (18 months - 3 years) with speech/language delays. Caregivers must attend.
-      </td>
-      <td>Day Camp</td>
-      <td>Not specified</td>
-      <td>FREE (Scholarships provided)</td>
-      <td>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScTBscXYG24F0rnBe-bo9MtkXKfqt5TdWK-DdDvdIcCyHXs0Q/viewform?" target="_blank">
-          Registration Form
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camp List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0055a5, #003f7f);
+      color: #fff;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .navbar {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+    }
+    input[type="text"] {
+      width: 60%;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      outline: none;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    .form-container {
+      background: #fff;
+      color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      width: 400px;
+      margin-top: 80px;
+    }
+    .camp-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+      width: 80%;
+    }
+    .camp-card {
+      background: #fff;
+      color: #333;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      margin: 10px;
+      width: 250px;
+      text-align: left;
+    }
+    .camp-card h3 {
+      margin: 0;
+      color: #0055a5;
+    }
+    .camp-card p {
+      margin: 5px 0;
+    }
+    .camp-card a {
+      color: #0055a5;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
+  </div>
+
+  <div class="form-container">
+    <h2>Submit a Camp</h2>
+    <form id="campForm">
+      <label>Camp Name:</label>
+      <input type="text" id="name" required>
+      <label>Location:</label>
+      <input type="text" id="location" required>
+      <label>Date:</label>
+      <input type="date" id="date" required>
+      <label>Description:</label>
+      <textarea id="description" required></textarea>
+      <label>Website:</label>
+      <input type="url" id="website" placeholder="https://example.com">
+      <button type="submit">Submit</button>
+    </form>
+    <p id="responseMessage"></p>
+  </div>
+
+  <div class="camp-list" id="campContainer"></div>
+
+  <script>
+    document.getElementById("campForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const formData = {
+        name: document.getElementById("name").value,
+        location: document.getElementById("location").value,
+        date: document.getElementById("date").value,
+        description: document.getElementById("description").value,
+        website: document.getElementById("website").value
+      };
+
+      const response = await fetch("https://script.google.com/macros/s/AKfycbyEbUtSloIsGyJrBVrynwJsF8PmzmCBt1irSdCqMTxAJ4P6uQ5znwNh8k7H2M6aBwX83w/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        document.getElementById("responseMessage").innerText = "Form submitted successfully!";
+        document.getElementById("campForm").reset();
+        fetchCamps();
+      } else {
+        document.getElementById("responseMessage").innerText = "Error submitting form.";
+      }
+    });
+
+    async function fetchCamps() {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbyEbUtSloIsGyJrBVrynwJsF8PmzmCBt1irSdCqMTxAJ4P6uQ5znwNh8k7H2M6aBwX83w/exec");
+      const camps = await response.json();
+      const container = document.getElementById("campContainer");
+      container.innerHTML = camps.map(camp => `
+        <div class="camp-card">
+          <h3>${camp.name}</h3>
+          <p><strong>Location:</strong> ${camp.location}</p>
+          <p><strong>Date:</strong> ${camp.date}</p>
+          <p>${camp.description}</p>
+          ${camp.website ? `<a href="${camp.website}" target="_blank">Visit Website</a>` : ""}
+        </div>
+      `).join("");
+    }
+
+    function searchCamps() {
+      const input = document.getElementById("searchBox").value.toLowerCase();
+      const cards = document.querySelectorAll(".camp-card");
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? "block" : "none";
+      });
+    }
+
+    fetchCamps();
+  </script>
+
+</body>
+</html>
