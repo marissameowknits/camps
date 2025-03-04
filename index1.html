@@ -25,6 +25,7 @@
       position: fixed;
       top: 0;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
       backdrop-filter: blur(10px);
@@ -55,10 +56,11 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.3s;
     }
     .camp-card:hover {
       transform: scale(1.05);
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
     }
     .camp-card h3 {
       margin: 0;
@@ -91,12 +93,8 @@
       <option value="Yes">Yes</option>
       <option value="No">No</option>
     </select>
-    <select id="costFilter" onchange="filterCamps()">
-      <option value="">All Costs</option>
-      <option value="low">Under $500</option>
-      <option value="mid">$500 - $1000</option>
-      <option value="high">Above $1000</option>
-    </select>
+    <input type="range" id="costRange" min="0" max="2000" step="100" value="2000" oninput="updateCostLabel()">
+    <label id="costLabel">Cost: $2000</label>
   </div>
 
   <div id="campContainer"></div>
@@ -117,7 +115,7 @@
         document.getElementById("campContainer").innerHTML = "<p>Failed to load camp data.</p>";
       }
     }
- 
+
     function displayCamps(camps) {
       const container = document.getElementById("campContainer");
       container.innerHTML = camps.map(camp => `
@@ -133,22 +131,10 @@
       `).join("");
     }
 
-    function filterCamps() {
-      const search = document.getElementById("searchBox").value.toLowerCase();
-      const type = document.getElementById("typeFilter").value;
-      const coda = document.getElementById("codaFilter").value;
-      const cost = document.getElementById("costFilter").value;
-      
-      document.querySelectorAll(".camp-card").forEach(card => {
-        const text = card.innerText.toLowerCase();
-        const matches = text.includes(search) && 
-                        (!type || text.includes(type.toLowerCase())) &&
-                        (!coda || text.includes(coda.toLowerCase())) &&
-                        (!cost || (cost === "low" && text.includes("$")) ||
-                                   (cost === "mid" && text.includes("$500")) ||
-                                   (cost === "high" && text.includes("$1000")));
-        card.style.display = matches ? "block" : "none";
-      });
+    function updateCostLabel() {
+      const cost = document.getElementById("costRange").value;
+      document.getElementById("costLabel").textContent = `Cost: $${cost}`;
+      filterCamps();
     }
 
     fetchCamps();
