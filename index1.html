@@ -69,10 +69,15 @@
   <script>
     async function fetchCamps() {
       try {
-        const response = await fetch('camps.json'); // Update this with the correct file path
+        const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";
+        const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
+        const response = await fetch(url);
         if (!response.ok) throw new Error('Failed to load data');
-        const json = await response.json();
-        displayCamps(json);
+        const text = await response.text();
+        const json = JSON.parse(text.substring(47, text.length - 2));
+        
+        const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
+        displayCamps(campData);
       } catch (error) {
         console.error("Error loading data:", error);
         document.getElementById("campContainer").innerHTML = "<p>Failed to load camp data.</p>";
@@ -99,15 +104,15 @@
           <tbody>
             ${camps.map(camp => `
               <tr>
-                <td>${camp.name}</td>
-                <td>${camp.state}</td>
-                <td>${camp.dates}</td>
-                <td>${camp.location}</td>
-                <td>${camp.description}</td>
-                <td>${camp.type}</td>
-                <td>${camp.codaAllowed}</td>
-                <td>${camp.cost}</td>
-                <td>${camp.website ? `<a href="${camp.website.startsWith("http") ? camp.website : "https://" + camp.website}" target="_blank">Visit</a>` : "N/A"}</td>
+                <td>${camp[0]}</td>
+                <td>${camp[1]}</td>
+                <td>${camp[2]}</td>
+                <td>${camp[3]}</td>
+                <td>${camp[4]}</td>
+                <td>${camp[5]}</td>
+                <td>${camp[6]}</td>
+                <td>${camp[7]}</td>
+                <td>${camp[8] ? `<a href="${camp[8].startsWith("http") ? camp[8] : "https://" + camp[8]}" target="_blank">Visit</a>` : "N/A"}</td>
               </tr>
             `).join("")}
           </tbody>
