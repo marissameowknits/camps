@@ -2,179 +2,510 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Camp List</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <title>All Camps Information (2025)</title>
   <style>
-    body { 
-      font-family: Arial, sans-serif; 
+    /* Global Styles */
+    body {
       margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #0055a5, #003f7f);
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    /* Header Section */
+    header {
+      background-color: #003366;
       color: #fff;
-      text-align: center;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .navbar {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.2);
-      padding: 15px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: flex;
-      justify-content: center;
-      backdrop-filter: blur(10px);
-    }
-    input[type="text"] {
-      width: 60%;
-      padding: 12px;
-      font-size: 16px;
-      border: none;
-      border-radius: 25px;
-      outline: none;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      padding: 20px 0;
       text-align: center;
     }
-    .form-container {
-      background: #fff;
-      color: #333;
+    /* Container for Content */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-      width: 400px;
-      margin-top: 80px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .camp-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 20px;
-      width: 80%;
+    /* Section Headings */
+    h2 {
+      text-align: center;
+      color: #003366;
+      margin-top: 40px;
+      margin-bottom: 20px;
     }
-    .camp-card {
-      background: #fff;
-      color: #333;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-      margin: 10px;
-      width: 250px;
+    /* Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px; /* reduced from 12px */
       text-align: left;
+      vertical-align: top;
+      line-height: 1.2; /* reduces extra space */
+      font-size: 14px; /* optional: adjust as needed */
     }
-    .camp-card h3 {
-      margin: 0;
-      color: #0055a5;
+    th {
+      background-color: #0055a5;
+      color: #fff;
     }
-    .camp-card p {
-      margin: 5px 0;
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
     }
-    .camp-card a {
+    a {
       color: #0055a5;
       text-decoration: none;
-      font-weight: bold;
     }
-    .pagination {
-      margin-top: 20px;
-    }
-    .pagination button {
-      padding: 10px 15px;
-      margin: 5px;
-      border: none;
-      border-radius: 5px;
-      background: #0055a5;
-      color: white;
-      cursor: pointer;
-    }
-    .pagination button:disabled {
-      background: #ccc;
-      cursor: not-allowed;
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>All Camps Information (2025)</h1>
+  </header>
+  
+  <div class="container">
+    <!-- ==================== ARKANSAS CAMPS ==================== -->
+    <h2>Arkansas Camps</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Camp Name</th>
+          <th>Dates</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>CODA Allowed</th>
+          <th>Cost</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ASD 2025 Summer Camp -->
+        <tr>
+          <td>ASD 2025 Summer Camp</td>
+          <td>June 16 - 27, 2025</td>
+          <td>Arkansas School for the Deaf, Little Rock, AR</td>
+          <td>Fun, creative, learning. More info coming soon (per Instagram).</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>
+            <a href="https://www.instagram.com/asd_leopards" target="_blank">
+              instagram.com/asd_leopards
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <div class="navbar">
-    <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
+   <!-- ==================== COLORADO CAMPS ==================== -->
+<h2>Colorado Camps</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Camp Name</th>
+      <th>Dates</th>
+      <th>Location</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>CODA Allowed</th>
+      <th>Cost</th>
+      <th>Website</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Aspen Camp Deaf Immersion -->
+    <tr>
+      <td>Aspen Camp Deaf Immersion</td>
+      <td>ASL 1: July 18-21, 2025<br>ASL 2: July 25-28, 2025</td>
+      <td>Aspen Camp, Aspen, CO</td>
+      <td>Deaf &amp; ASL immersion for adults (18+).</td>
+      <td>Immersion Camp</td>
+      <td>Not specified</td>
+      <td>$425</td>
+      <td><a href="https://aspencamp.org" target="_blank">aspencamp.org</a></td>
+    </tr>
+    <!-- Aspen Camp Families in Nature -->
+    <tr>
+      <td>Aspen Camp Families in Nature</td>
+      <td>June 20-23, 2025</td>
+      <td>Aspen Camp, Snowmass, CO</td>
+      <td>
+        A family-oriented camp offering outdoor skill-building, nature crafts, and community connections in a supportive environment.
+      </td>
+      <td>Family Camp</td>
+      <td>Yes</td>
+      <td>$275 for a family of 2; $50 each additional member</td>
+      <td><a href="https://aspencamp.org/creekside/" target="_blank">aspencamp.org/creekside/</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+    <!-- ==================== MICHIGAN CAMPS (HOLLEY INSTITUTE) ==================== -->
+    <h2>Michigan Camps (Holley Institute Family Weeks)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Camp Name</th>
+          <th>Dates</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>CODA Allowed</th>
+          <th>Cost</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Family Week 1 -->
+        <tr>
+          <td>Family Week 1 (Ages 0-7)</td>
+          <td>June 29 - July 4, 2025</td>
+          <td>Carls Family Village, Brooklyn, MI</td>
+          <td>
+            Parents attend morning workshops on ASL literacy &amp; Deaf culture; children enjoy supervised activities.
+          </td>
+          <td>Family Week</td>
+          <td>Not specified</td>
+          <td>
+            $250/adult, $150/child<br>$150 deposit required
+          </td>
+          <td><a href="https://www.holleyfv.org/family-week" target="_blank">holleyfv.org/family-week</a></td>
+        </tr>
+        <!-- Family Week 2 -->
+        <tr>
+          <td>Family Week 2 (Ages 0-7)</td>
+          <td>July 6 - July 11, 2025</td>
+          <td>Carls Family Village, Brooklyn, MI</td>
+          <td>
+            Workshops on civil rights/laws for DDBHH children and Q&amp;A with professionals.
+          </td>
+          <td>Family Week</td>
+          <td>Not specified</td>
+          <td>
+            $250/adult, $150/child<br>$150 deposit required
+          </td>
+          <td><a href="https://www.holleyfv.org/family-week" target="_blank">holleyfv.org/family-week</a></td>
+        </tr>
+        <!-- Family Week 3 -->
+        <tr>
+          <td>Family Week 3 (Ages 8-15)</td>
+          <td>July 13 - July 18, 2025</td>
+          <td>Carls Family Village, Brooklyn, MI</td>
+          <td>
+            Limited availability. Focus on mental/emotional health and ASL literacy.
+          </td>
+          <td>Family Week</td>
+          <td>Not specified</td>
+          <td>
+            $250/adult, $150/child<br>$150 deposit required
+          </td>
+          <td><a href="https://www.holleyfv.org/family-week" target="_blank">holleyfv.org/family-week</a></td>
+        </tr>
+        <!-- Family Week 4 -->
+        <tr>
+          <td>Family Week 4 (Ages 0-17)</td>
+          <td>July 20 - July 25, 2025</td>
+          <td>Carls Family Village, Brooklyn, MI</td>
+          <td>
+            For Deaf parents with DDBHH children; activities to explore identity and community.
+          </td>
+          <td>Family Week</td>
+          <td>Not specified</td>
+          <td>
+            $250/adult, $150/child<br>$150 deposit required
+          </td>
+          <td><a href="https://www.holleyfv.org/family-week" target="_blank">holleyfv.org/family-week</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ==================== NEW YORK CAMPS (CAMP MARK SEVEN) ==================== -->
+    <h2>New York Camps (Camp Mark Seven)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Camp Name</th>
+          <th>Dates</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>CODA Allowed</th>
+          <th>Cost</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Opening Weekend -->
+        <tr>
+          <td>Opening Weekend</td>
+          <td>May 30 - June 3, 2025</td>
+          <td>Camp Mark Seven, Old Forge, NY</td>
+          <td>Kicking off the summer season at CM7.</td>
+          <td>Overnight Camp</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td><a href="https://campmark7.org/events/151" target="_blank">Opening Weekend</a></td>
+        </tr>
+        <!-- Deaf Youth Camp (Ages 9-12) -->
+        <tr>
+          <td>Deaf Youth Camp (Ages 9-12)</td>
+          <td>June 22 - July 3, 2025 (1 PM - 12 PM)</td>
+          <td>Camp Mark Seven, Old Forge, NY</td>
+          <td>
+            Overnight youth camp with swimming, canoe trips, Deaflympics, arts, and bonfires.
+          </td>
+          <td>Overnight Camp</td>
+          <td>Not specified</td>
+          <td>$1525</td>
+          <td><a href="https://campmark7.org/programs/12" target="_blank">Deaf Youth Camp </a></td>
+        </tr>
+        <!-- Deaf Teen Camp (Ages 13-16) -->
+        <tr>
+          <td>Deaf Teen Camp (Ages 13-16)</td>
+          <td>July 6 - July 18, 2025</td>
+          <td>Camp Mark Seven, Old Forge, NY</td>
+          <td>
+            Teen program with outdoor adventures, STEM activities, and a final Parents’ Night.
+          </td>
+          <td>Overnight Camp</td>
+          <td>Not specified</td>
+          <td>$1525</td>
+ <td><a href="https://campmark7.org/programs/14" target="_blank">Deaf Teen Camp </a></td>
+        </tr>
+        <!-- KODA Youth Camp (Ages 9-12) -->
+        <tr>
+          <td>KODA Youth Camp (Ages 9-12)</td>
+          <td>July 20 - August 1, 2025</td>
+          <td>Camp Mark Seven, Old Forge, NY</td>
+          <td>
+            For hearing children of Deaf adults, focusing on dual identities and peer connection.
+          </td>
+          <td>Overnight Camp</td>
+          <td>Yes</td>
+          <td>$1525</td>
+           <td><a href="https://campmark7.org/programs/9" target="_blank">KODA Youth Camp </a></td>
+        </tr>
+        <!-- KODA Teen Camp (Ages 13-16) -->
+        <tr>
+          <td>KODA Teen Camp (Ages 13-16)</td>
+          <td>August 3 - August 15, 2025</td>
+          <td>Camp Mark Seven, Old Forge, NY</td>
+          <td>
+            Two-week program for hearing teens of Deaf parents with outdoor and creative activities.
+          </td>
+          <td>Overnight Camp</td>
+          <td>Yes</td>
+          <td>$1525</td>
+      <td><a href="https://campmark7.org/programs/11" target="_blank">KODA Teen Camp </a></td>
+        </tr>
+        <!-- Deaf Bible Week (Ages 21+) -->
+        <tr>
+          <td>Deaf Bible Week (Ages 21+)</td>
+          <td>August 17 - August 23, 2025 (1 PM - 12 PM)</td>
+          <td>Camp Mark Seven, Old Forge, NY</td>
+          <td>
+            Explore religious iconography and spiritual depth with daily Mass, seminars, and group reflections.
+          </td>
+          <td>Program</td>
+          <td>Not specified</td>
+          <td>$600</td>
+          <td>
+            <a href="https://campmark7.org/programs/Deaf+Bible+Week+%28Ages+21%2B%29" target="_blank">
+              Deaf Bible Week
+            </a>
+          </td>
+        </tr>
+        <!-- Active Deaf Adults 50+ -->
+        <tr>
+          <td>Active Deaf Adults 50+</td>
+          <td>August 17 - August 23, 2025 (1 PM - 12 PM)</td>
+          <td>Camp Mark Seven, Old Forge, NY</td>
+          <td>
+            Relaxing, social program with hiking, kayaking, and workshops for Deaf adults over 50.
+          </td>
+          <td>Program</td>
+          <td>Not specified</td>
+          <td>$600</td>
+          <td>
+            <a href="https://campmark7.org/programs/Active+Deaf+Adults+50+Plus+Week" target="_blank">
+             Active Deaf Adults 50+ Week
+            </a>
+          </td>
+        </tr>
+        <!-- ASL & Deaf Culture Immersion Week (Ages 21+) -->
+        <tr>
+          <td>ASL &amp; Deaf Culture Immersion Week (Ages 21+)</td>
+          <td>August 24 - August 30, 2025 (1 PM - 12 PM)</td>
+          <td>Camp Mark Seven, Old Forge, NY</td>
+          <td>
+            Immersion in ASL and Deaf Culture with workshops, themed events, and daily activities.
+          </td>
+          <td>Program</td>
+          <td>Not specified</td>
+          <td>$600</td>
+          <td>
+            <a href="https://campmark7.org/programs/ASL+and+Deaf+Culture+Immersion+Week++%28Ages+21%2B%29" target="_blank">
+             Deaf Culture Immersion Week
+            </a>
+          </td>
+        </tr>
+        <!-- Adult CODA Retreat Weekend (Ages 21+) -->
+        <tr>
+          <td>Adult CODA Retreat Weekend (Ages 21+)</td>
+          <td>September 18 - September 21, 2025 (4 PM - 10 AM)</td>
+          <td>Camp Mark Seven, Old Forge, NY</td>
+          <td>
+            Weekend retreat for adult hearing children of Deaf parents with team-building,
+            crafts, hiking, and a talent show.
+          </td>
+          <td>Program</td>
+          <td>Yes</td>
+          <td>$300</td>
+          <td>
+            <a href="https://campmark7.org/programs/Adult+Coda+Retreat+Weekend++%28Ages+21%2B%29" target="_blank">
+              Adult CODA Retreat Weekend
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ==================== OHIO CAMPS ==================== -->
+    <h2>Ohio Camps</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Camp Name</th>
+          <th>Dates</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>CODA Allowed</th>
+          <th>Cost</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- OSD Adventure Day Camp -->
+        <tr>
+          <td>OSD Adventure Day Camp</td>
+          <td>Not specified</td>
+          <td>Ohio School for the Deaf (OSD)</td>
+          <td>
+            Two groups:<br>
+            • 4th–8th grade (Deaf/Hard of Hearing)<br>
+            • 3rd–5th grade (Hearing peers; limited spots)
+          </td>
+          <td>Day Camp</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>
+            Registration: 
+            <a href="https://form.jotform.com/252003718107144" target="_blank">Click Here</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ==================== SOUTH CAROLINA CAMPS ==================== -->
+    <h2>South Carolina Camps</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Camp Name</th>
+          <th>Dates</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>CODA Allowed</th>
+          <th>Cost</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Camp Sertoma SC -->
+        <tr>
+          <td>Camp Sertoma SC</td>
+          <td>Not specified</td>
+          <td>Clemson University’s Outdoor Lab</td>
+          <td>Summer camp experiences in partnership with Clemson University.</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td><a href="https://campsertomasc.com" target="_blank">campsertomasc.com</a></td>
+        </tr>
+        <!-- Camp Wonder Hands -->
+        <tr>
+          <td>Camp Wonder Hands</td>
+          <td>June 16 - June 20, 2025</td>
+          <td>Camp Cole, Eastover, SC</td>
+          <td>Weeklong overnight camp for deaf/hard-of-hearing children.</td>
+          <td>Overnight Camp</td>
+          <td>Only for SC deaf/hard-of-hearing (7-17)</td>
+          <td>Not specified</td>
+          <td><a href="https://www.campcole.org/campwonderhands/" target="_blank">campcole.org</a></td>
+        </tr>
+        <!-- Camp Burnt Gin -->
+        <tr>
+          <td>Camp Burnt Gin</td>
+          <td>June 4 - July 19, 2025 (Various Sessions)</td>
+          <td>Not specified</td>
+          <td>
+            Multiple sessions for different age groups, including one for blood disorders.
+          </td>
+          <td>Overnight Camp</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td><a href="https://dph.sc.gov/health-wellness/child-teen-health/camp-burnt-gin/camp-burnt-gin-programs" target="_blank">dph.sc.gov</a></td>
+        </tr>
+        <!-- Koala Camp -->
+        <tr>
+          <td>Koala Camp</td>
+          <td>May 6 - May 22, 2025 (Tue &amp; Thu)</td>
+          <td>Columbia College, SC</td>
+          <td>Mini-camp for children (18 mos-3 yrs) with speech/language delays, ASL focus.</td>
+          <td>Day Camp</td>
+          <td>Not specified</td>
+          <td>Free (scholarships)</td>
+          <td>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScTBscXYG24F0rnBe-bo9MtkXKfqt5TdWK-DdDvdIcCyHXs0Q/viewform?" target="_blank">
+              docs.google.com
+            </a>
+          </td>
+        </tr>
+        <!-- Hornet Spy Summer Camp -->
+        <tr>
+          <td>Hornet Spy Summer Camp</td>
+          <td>June 2 - June 7, 2025</td>
+          <td>SCSDB Campus</td>
+          <td>Team-building, outdoor, and tech workshops for deaf/hard-of-hearing students.</td>
+          <td>Day &amp; Residential Options</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td><a href="https://www.scsdb.org/summer-camp" target="_blank">scsdb.org</a></td>
+        </tr>
+        <!-- Camp Ichthus -->
+        <tr>
+          <td>Camp Ichthus</td>
+          <td>TBD</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td>Not specified</td>
+          <td><a href="https://www.scbcdeaf.org" target="_blank">scbcdeaf.org</a></td>
+        </tr>
+      </tbody>
+    </table>
+
   </div>
-
-  <div class="form-container">
-    <h2>Submit a Camp</h2>
-    <form id="campForm">
-      <label>Camp Name:</label>
-      <input type="text" id="name" required>
-      <label>Location:</label>
-      <input type="text" id="location" required>
-      <label>Date:</label>
-      <input type="date" id="date" required>
-      <label>Description:</label>
-      <textarea id="description" required></textarea>
-      <label>Website:</label>
-      <input type="url" id="website" placeholder="https://example.com">
-      <button type="submit">Submit</button>
-    </form>
-    <p id="responseMessage"></p>
-  </div>
-
-  <div class="camp-list" id="campContainer"></div>
-  <div class="pagination">
-    <button id="prevPage" onclick="changePage(-1)" disabled>Previous</button>
-    <button id="nextPage" onclick="changePage(1)" disabled>Next</button>
-  </div>
-
-  <script>
-    let campsData = [];
-    let currentPage = 1;
-    const itemsPerPage = 6;
-
-    async function fetchCamps() {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbyEbUtSloIsGyJrBVrynwJsF8PmzmCBt1irSdCqMTxAJ4P6uQ5znwNh8k7H2M6aBwX83w/exec");
-      campsData = await response.json();
-      displayCamps();
-    }
-
-    function displayCamps() {
-      const container = document.getElementById("campContainer");
-      container.innerHTML = "";
-      const start = (currentPage - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-      const paginatedCamps = campsData.slice(start, end);
-      
-      paginatedCamps.forEach(camp => {
-        container.innerHTML += `
-          <div class="camp-card">
-            <h3>${camp.name}</h3>
-            <p><strong>Location:</strong> ${camp.location}</p>
-            <p><strong>Date:</strong> ${camp.date}</p>
-            <p>${camp.description}</p>
-            ${camp.website ? `<a href="${camp.website}" target="_blank">Visit Website</a>` : ""}
-          </div>
-        `;
-      });
-      
-      document.getElementById("prevPage").disabled = currentPage === 1;
-      document.getElementById("nextPage").disabled = end >= campsData.length;
-    }
-
-    function changePage(direction) {
-      currentPage += direction;
-      displayCamps();
-    }
-
-    function searchCamps() {
-      const input = document.getElementById("searchBox").value.toLowerCase();
-      document.querySelectorAll(".camp-card").forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(input) ? "block" : "none";
-      });
-    }
-
-    setInterval(fetchCamps, 5000); // Automatically refresh every 5 seconds
-    fetchCamps();
-  </script>
-
 </body>
 </html>
