@@ -18,10 +18,6 @@ async function loadCamps() {
         const container = document.getElementById("campContainer");
         container.innerHTML = "";
 
-        Object.keys(states).sort().forEach(state => {
-            const section = document.createElement("div");
-            section.className = "camp-section";
-            section.innerHTML = `<h2>${state} Camps</h2>`;
 
             const table = document.createElement("table");
             table.innerHTML = `
