@@ -15,13 +15,6 @@ async function loadCamps() {
 
         const states = {};
 
-        // Group camps by state
-        campData.forEach(camp => {
-            const state = camp[2] ? camp[2].trim() : "Other";  
-            if (!states[state]) states[state] = [];
-            states[state].push(camp);
-        });
-
         const container = document.getElementById("campContainer");
         container.innerHTML = "";
 
