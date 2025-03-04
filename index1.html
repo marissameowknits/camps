@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body { 
-      font-family: Arial, sans-serif; 
+      font-family: 'Poppins', sans-serif; 
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #0055a5, #003f7f);
+      background: linear-gradient(135deg, #004aad, #002b5e);
       color: #fff;
       text-align: center;
       display: flex;
@@ -20,7 +20,7 @@
     }
     .navbar {
       width: 100%;
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.3);
       padding: 15px;
       position: fixed;
       top: 0;
@@ -28,6 +28,7 @@
       display: flex;
       justify-content: center;
       backdrop-filter: blur(10px);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     }
     input[type="text"] {
       width: 80%;
@@ -37,48 +38,61 @@
       border: none;
       border-radius: 25px;
       outline: none;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
       text-align: center;
     }
     #campContainer {
       max-height: 75vh;
       overflow-y: auto;
       width: 90%;
-      margin-top: 80px;
+      margin-top: 100px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
+      padding-bottom: 20px;
     }
     .camp-card {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.9);
       color: #333;
       width: 90%;
-      max-width: 300px;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      max-width: 320px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
       text-align: left;
+      transition: transform 0.3s;
+    }
+    .camp-card:hover {
+      transform: scale(1.05);
     }
     .camp-card h3 {
-      margin: 0;
-      color: #0055a5;
+      margin: 0 0 10px 0;
+      color: #004aad;
+      font-size: 20px;
+    }
+    .camp-card p {
+      font-size: 14px;
+      margin: 5px 0;
     }
     .camp-card a {
       display: inline-block;
       margin-top: 10px;
-      padding: 8px 12px;
-      background: #0055a5;
+      padding: 10px 15px;
+      background: #004aad;
       color: #fff;
-      border-radius: 5px;
+      border-radius: 8px;
       text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
     }
     .camp-card a:hover {
-      background: #003f7f;
+      background: #002b5e;
     }
     #loading {
       margin-top: 100px;
-      font-size: 18px;
+      font-size: 20px;
+      font-weight: bold;
       color: #fff;
     }
     #errorMessage {
@@ -101,29 +115,28 @@
 
   <script>
     async function fetchCamps() {
-  document.getElementById("loading").style.display = "block";
-  document.getElementById("errorMessage").style.display = "none";
+      document.getElementById("loading").style.display = "block";
+      document.getElementById("errorMessage").style.display = "none";
 
-  try {
-    const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";
-    const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&tq=&gid=0`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Failed to load data");
+      try {
+        const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";
+        const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&tq=&gid=0`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Failed to load data");
 
-    const text = await response.text();
-    const jsonStart = text.indexOf("{"); // Find the first '{' to properly parse JSON
-    const json = JSON.parse(text.substring(jsonStart, text.length - 2));
+        const text = await response.text();
+        const jsonStart = text.indexOf("{");
+        const json = JSON.parse(text.substring(jsonStart, text.length - 2));
 
-    const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
-    displayCamps(campData);
-  } catch (error) {
-    console.error("Error loading data:", error);
-    document.getElementById("errorMessage").style.display = "block";
-  } finally {
-    document.getElementById("loading").style.display = "none";
-  }
-}
-
+        const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
+        displayCamps(campData);
+      } catch (error) {
+        console.error("Error loading data:", error);
+        document.getElementById("errorMessage").style.display = "block";
+      } finally {
+        document.getElementById("loading").style.display = "none";
+      }
+    }
  
     function displayCamps(camps) {
       const container = document.getElementById("campContainer");
