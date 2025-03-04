@@ -2,151 +2,200 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Camp List by State</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camp List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    /* Global Styles */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+    
     body { 
-      font-family: Arial, sans-serif; 
-      margin: 20px; 
-      background-color: #f8f9fa; 
-      color: #333; 
-      text-align: center; 
+      font-family: 'Poppins', sans-serif; 
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #001f4d, #000a1a);
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-    h1 { 
-      color: #0055a5; 
-      margin-bottom: 20px; 
+    .navbar {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      backdrop-filter: blur(15px);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
+      border-bottom: 3px solid #0099ff;
+      z-index: 1000;
     }
-    /* Table Container */
-    .camp-section {
-      max-width: 1200px;
-      margin: 20px auto;
-      text-align: left;
-    }
-    .camp-section h2 {
-      background-color: #0055a5;
-      color: white;
-      padding: 10px;
-      border-radius: 5px;
+    input[type="text"] {
+      width: 80%;
+      max-width: 480px;
+      padding: 16px;
+      font-size: 20px;
+      border: none;
+      border-radius: 35px;
+      outline: none;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.7);
       text-align: center;
     }
-    /* Table Styles */
-    table {
+    /* Header styling */
+    header {
+      margin-top: 100px; /* spacing below fixed navbar */
+      padding: 20px;
+    }
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+      color: #0099ff;
+    }
+    header p {
+      font-size: 18px;
+      margin: 0;
+    }
+    /* Container with rows */
+    #campContainer {
+      flex: 1;
+      max-height: 75vh;
+      overflow-y: auto;
+      width: 90%;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-bottom: 35px;
+    }
+    /* Row styling (no card look) */
+    .camp-card {
+      background: transparent;
+      color: #fff;
       width: 100%;
-      border-collapse: collapse;
-      background-color: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    th, td {
-      padding: 8px; /* Smaller row size */
+      max-width: 800px;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       text-align: left;
-      border-bottom: 1px solid #ddd;
-      font-size: 14px; /* Reduce font size slightly */
+      transition: background 0.3s;
     }
-    th {
-      background-color: #0055a5;
-      color: white;
+    .camp-card:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
+    .camp-card h3 {
+      margin: 0 0 8px 0;
+      color: #0099ff;
+      font-size: 28px;
+      font-weight: 700;
     }
-    tr:hover {
-      background-color: #e1f5fe;
+    .camp-card p {
+      font-size: 16px;
+      margin: 8px 0;
+      line-height: 1.6;
     }
-    a {
-      color: #007bff;
+    .camp-card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 16px;
+      background: linear-gradient(135deg, #0099ff, #002a4a);
+      color: #fff;
+      border-radius: 8px;
       text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.3s;
     }
-    a:hover {
-      text-decoration: underline;
+    .camp-card a:hover {
+      background: linear-gradient(135deg, #007acc, #001f3a);
+      transform: translateY(-3px);
     }
-    @media (max-width: 768px) {
-      table { font-size: 12px; }
-      th, td { padding: 6px; }
+    #loading {
+      margin-top: 150px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #fff;
+      animation: fadein 1.5s infinite alternate;
+    }
+    @keyframes fadein {
+      from { opacity: 0.6; }
+      to { opacity: 1; }
+    }
+    #errorMessage {
+      display: none;
+      color: #ff4d4d;
+      margin-top: 26px;
+      font-weight: bold;
+    }
+    /* Footer styling */
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      font-size: 16px;
+      border-top: 3px solid #0099ff;
     }
   </style>
 </head>
 <body>
 
-  <h1>Camp List by State</h1>
+  <div class="navbar">
+    <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
+  </div>
 
+  <header>
+    <h1>Camp List</h1>
+    <p>Your guide to summer camps</p>
+  </header>
+  
+  <div id="loading">Loading camps...</div>
+  <p id="errorMessage">Failed to load camp data. <button onclick="fetchCamps()">Retry</button></p>
+  
   <div id="campContainer"></div>
 
+  <footer>
+    &copy; Clerc Center Summer 2025 Camp List. All rights reserved.
+  </footer>
+
   <script>
-    async function loadCamps() {
-      const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";  
-      const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
-
+    async function fetchCamps() {
+      document.getElementById("loading").style.display = "block";
+      document.getElementById("errorMessage").style.display = "none";
       try {
+        const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";
+        const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&tq=&gid=0`;
         const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error("Failed to load data");
         const text = await response.text();
-        const json = JSON.parse(text.substring(47, text.length - 2));
-
-        const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : ""))); 
-
-        // Categorize by state
-        const states = {};
-        campData.forEach(camp => {
-          const state = camp[1] ? camp[1].trim() : "Other"; // Column 1 is "State"
-          if (!states[state]) states[state] = [];
-          states[state].push(camp);
-        });
-
-        const container = document.getElementById("campContainer");
-        container.innerHTML = "";
-
-        Object.keys(states).sort().forEach(state => {
-          const section = document.createElement("div");
-          section.className = "camp-section";
-          section.innerHTML = `<h2>${state} Camps</h2>`;
-
-          const table = document.createElement("table");
-          table.innerHTML = `
-            <thead>
-              <tr>
-                <th>Camp Name</th>
-                <th>Dates</th>
-                <th>Location</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>CODA Allowed</th>
-                <th>Cost</th>
-                <th>Website</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${states[state]
-                .map(camp => `
-                  <tr>
-                    <td>${camp[0]}</td>
-                    <td>${camp[2]}</td>
-                    <td>${camp[3]}</td>
-                    <td>${camp[4]}</td>
-                    <td>${camp[5]}</td>
-                    <td>${camp[6]}</td>
-                    <td>${camp[7]}</td>
-                    <td>${camp[8] ? `<a href="${camp[8].startsWith("http") ? camp[8] : "https://" + camp[8]}" target="_blank">Visit</a>` : "N/A"}</td>
-                  </tr>
-                `)
-                .join("")}
-            </tbody>
-          `;
-
-          section.appendChild(table);
-          container.appendChild(section);
-        });
-
+        const jsonStart = text.indexOf("{");
+        const json = JSON.parse(text.substring(jsonStart, text.length - 2));
+        const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
+        displayCamps(campData);
       } catch (error) {
         console.error("Error loading data:", error);
+        document.getElementById("errorMessage").style.display = "block";
+      } finally {
+        document.getElementById("loading").style.display = "none";
       }
     }
-
-    loadCamps();
+    function displayCamps(camps) {
+      const container = document.getElementById("campContainer");
+      container.innerHTML = camps.map(camp => `
+        <div class="camp-card">
+          <h3>${camp[0]}</h3>
+          <p>📍 ${camp[1]}</p>
+          <p>📅 ${camp[2]}</p>
+          <p>📍 ${camp[3]}</p>
+          <p>ℹ️ ${camp[4]}</p>
+          <p>👥 Type: ${camp[5]}</p>
+          <p>✅ CODA Allowed: ${camp[6]}</p>
+          <p>💲 Cost: ${camp[7]}</p>
+          <a href="${camp[9] ? camp[9] : '#'}" target="_blank">Visit Website</a>
+        </div>
+      `).join("");
+    }
+    fetchCamps();
   </script>
 
 </body>
