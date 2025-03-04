@@ -6,41 +6,42 @@
   <title>Camp List</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    body { 
+      font-family: Arial, sans-serif; 
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #004d99, #002b5e);
+      background: linear-gradient(135deg, #0055a5, #003f7f);
       color: #fff;
       text-align: center;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
     }
     .navbar {
       width: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.2);
       padding: 15px;
       position: fixed;
       top: 0;
+      left: 0;
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
       backdrop-filter: blur(10px);
     }
-    input, select {
+    input[type="text"] {
+      width: 60%;
       padding: 12px;
       font-size: 16px;
       border: none;
-      border-radius: 20px;
+      border-radius: 25px;
       outline: none;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
     #campContainer {
-      max-height: 80vh;
+      max-height: 75vh;
       overflow-y: auto;
       width: 90%;
       margin-top: 80px;
@@ -52,39 +53,38 @@
     .camp-card {
       background: #fff;
       color: #333;
-      width: 350px;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      width: 300px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      text-align: left;
     }
-    .camp-card:hover {
-      transform: scale(1.08);
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+    .camp-card h3 {
+      margin: 0;
+      color: #0055a5;
+    }
+    .camp-card p {
+      font-size: 14px;
+      margin: 5px 0;
     }
     .camp-card a {
       display: inline-block;
       margin-top: 10px;
       padding: 8px 12px;
-      background: #004d99;
+      background: #0055a5;
       color: #fff;
       border-radius: 5px;
       text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
     }
     .camp-card a:hover {
-      background: #002b5e;
+      background: #003f7f;
     }
   </style>
 </head>
 <body>
 
   <div class="navbar">
-    <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="filterCamps()">
+    <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
   </div>
 
   <div id="campContainer"></div>
@@ -97,34 +97,40 @@
         const response = await fetch(url);
         if (!response.ok) throw new Error('Failed to load data');
         const text = await response.text();
-        const json = JSON.parse(text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1));
-
-        const campData = json.table.rows.map(row => {
-          return row.c.map(cell => (cell && cell.v !== undefined ? cell.v : "N/A"));
-        });
-
+        const json = JSON.parse(text.substring(47, text.length - 2));
+        
+        const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
         displayCamps(campData);
       } catch (error) {
         console.error("Error loading data:", error);
         document.getElementById("campContainer").innerHTML = "<p>Failed to load camp data.</p>";
       }
     }
-
+ 
     function displayCamps(camps) {
       const container = document.getElementById("campContainer");
       container.innerHTML = camps.map(camp => `
         <div class="camp-card">
-          <h3>${camp[1]}</h3>
-          <p><i class="fas fa-map-marker-alt"></i> ${camp[2]}</p>
-          <p><i class="fas fa-calendar"></i> ${camp[3]}</p>
-          <p><i class="fas fa-location-arrow"></i> ${camp[4]}</p>
-          <p><i class="fas fa-info-circle"></i> ${camp[5]}</p>
-          <p><i class="fas fa-users"></i> Type: ${camp[6]}</p>
-          <p><i class="fas fa-check-circle"></i> CODA Allowed: ${camp[7]}</p>
-          <p><i class="fas fa-dollar-sign"></i> Cost: ${camp[8]}</p>
-          ${camp[9] !== "N/A" ? `<a href="${camp[9].startsWith('http') ? camp[9] : 'https://' + camp[9]}" target="_blank">Visit Website</a>` : ""}
+          <h3>${camp[0]}</h3>
+          <p><i class="fas fa-map-marker-alt"></i> ${camp[1]}</p>
+          <p><i class="fas fa-calendar"></i> ${camp[2]}</p>
+          <p><i class="fas fa-location-arrow"></i> ${camp[3]}</p>
+          <p><i class="fas fa-info-circle"></i> ${camp[4]}</p>
+          <p><i class="fas fa-users"></i> Type: ${camp[5]}</p>
+          <p><i class="fas fa-check-circle"></i> CODA Allowed: ${camp[6]}</p>
+          <p><i class="fas fa-dollar-sign"></i> Cost: ${camp[7]}</p>
+          ${camp[8] ? `<a href="${camp[8].startsWith("http") ? camp[8] : "https://" + camp[8]}" target="_blank">Visit Website</a>` : "N/A"}
         </div>
       `).join("");
+    }
+
+    function searchCamps() {
+      const input = document.getElementById("searchBox").value.toLowerCase();
+      const cards = document.querySelectorAll(".camp-card");
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? "block" : "none";
+      });
     }
 
     fetchCamps();
