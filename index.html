@@ -28,7 +28,7 @@ async function loadCamps() {
         Object.keys(states).sort().forEach(state => {
             const section = document.createElement("div");
             section.className = "camp-section";
-            section.innerHTML = `<h2>${state} Camps</h2>`; // ✅ Corrected header to show state name
+            section.innerHTML = `<h2>${location} Camps</h2>`; // ✅ Corrected header to show state name
 
             const table = document.createElement("table");
             table.innerHTML = `
