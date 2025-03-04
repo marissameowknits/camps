@@ -6,13 +6,13 @@
   <title>Camp List</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
     
     body { 
       font-family: 'Poppins', sans-serif; 
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #003366, #000d1e);
+      background: linear-gradient(135deg, #001f4d, #000a1a);
       color: #fff;
       text-align: center;
       display: flex;
@@ -22,7 +22,7 @@
     }
     .navbar {
       width: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.7);
       padding: 20px;
       position: fixed;
       top: 0;
@@ -30,76 +30,76 @@
       display: flex;
       justify-content: center;
       backdrop-filter: blur(15px);
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.6);
-      border-bottom: 3px solid #007bff;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
+      border-bottom: 3px solid #0099ff;
     }
     input[type="text"] {
       width: 80%;
-      max-width: 450px;
+      max-width: 480px;
       padding: 16px;
       font-size: 20px;
       border: none;
       border-radius: 35px;
       outline: none;
-      box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.6);
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.7);
       text-align: center;
     }
     #campContainer {
       max-height: 75vh;
       overflow-y: auto;
       width: 90%;
-      margin-top: 120px;
+      margin-top: 130px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 30px;
-      padding-bottom: 30px;
+      gap: 35px;
+      padding-bottom: 35px;
     }
     .camp-card {
-      background: rgba(255, 255, 255, 0.99);
+      background: rgba(255, 255, 255, 0.98);
       color: #333;
       width: 90%;
-      max-width: 420px;
-      padding: 40px;
-      border-radius: 35px;
-      box-shadow: 0px 18px 36px rgba(0, 0, 0, 0.7);
+      max-width: 450px;
+      padding: 45px;
+      border-radius: 40px;
+      box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.8);
       text-align: left;
       transition: transform 0.5s, box-shadow 0.5s;
-      border-left: 12px solid #007bff;
+      border-left: 14px solid #0099ff;
     }
     .camp-card:hover {
-      transform: scale(1.15);
-      box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.8);
+      transform: scale(1.18);
+      box-shadow: 0px 22px 44px rgba(0, 0, 0, 0.9);
     }
     .camp-card h3 {
-      margin: 0 0 14px 0;
-      color: #007bff;
-      font-size: 30px;
+      margin: 0 0 16px 0;
+      color: #0099ff;
+      font-size: 32px;
       font-weight: 900;
     }
     .camp-card p {
-      font-size: 18px;
-      margin: 10px 0;
-      line-height: 2;
+      font-size: 19px;
+      margin: 12px 0;
+      line-height: 2.2;
     }
     .camp-card a {
       display: inline-block;
-      margin-top: 20px;
-      padding: 18px 26px;
-      background: linear-gradient(135deg, #007bff, #001a3a);
+      margin-top: 22px;
+      padding: 20px 28px;
+      background: linear-gradient(135deg, #0099ff, #002a4a);
       color: #fff;
-      border-radius: 16px;
+      border-radius: 18px;
       text-decoration: none;
       font-weight: bold;
       transition: background 0.3s, transform 0.3s;
     }
     .camp-card a:hover {
-      background: linear-gradient(135deg, #0056b3, #000d1e);
-      transform: translateY(-5px);
+      background: linear-gradient(135deg, #007acc, #001f3a);
+      transform: translateY(-6px);
     }
     #loading {
-      margin-top: 140px;
-      font-size: 28px;
+      margin-top: 150px;
+      font-size: 30px;
       font-weight: bold;
       color: #fff;
       animation: fadein 1.5s infinite alternate;
@@ -111,7 +111,7 @@
     #errorMessage {
       display: none;
       color: #ff4d4d;
-      margin-top: 24px;
+      margin-top: 26px;
       font-weight: bold;
     }
   </style>
@@ -124,32 +124,3 @@
   
   <div id="loading">Loading camps...</div>
   <p id="errorMessage">Failed to load camp data. <button onclick="fetchCamps()">Retry</button></p>
-  
-  <div id="campContainer"></div>
-
-  <script>
-    async function fetchCamps() {
-      document.getElementById("loading").style.display = "block";
-      document.getElementById("errorMessage").style.display = "none";
-      try {
-        const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";
-        const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&tq=&gid=0`;
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Failed to load data");
-        const text = await response.text();
-        const jsonStart = text.indexOf("{");
-        const json = JSON.parse(text.substring(jsonStart, text.length - 2));
-        const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
-        displayCamps(campData);
-      } catch (error) {
-        console.error("Error loading data:", error);
-        document.getElementById("errorMessage").style.display = "block";
-      } finally {
-        document.getElementById("loading").style.display = "none";
-      }
-    }
-    fetchCamps();
-  </script>
-
-</body>
-</html>
