@@ -14,45 +14,40 @@ async function loadCamps() {
         console.log("Loaded Camp Data:", campData); // Debugging - Check Console for Data
 
         const container = document.getElementById("campContainer");
-        container.innerHTML = "";
-
-
-            const table = document.createElement("table");
-            table.innerHTML = `
+        container.innerHTML = `
+            <table>
                 <thead>
                     <tr>
                         <th>Camp Name</th>
-                        <th>State</th>
                         <th>Dates</th>
                         <th>Location</th>
                         <th>Description</th>
                         <th>Type</th>
                         <th>CODA Allowed</th>
                         <th>Cost</th>
+                        <th>State</th>
                         <th>Website</th>
                     </tr>
                 </thead>
                 <tbody>
-                
-                        <tr>
-                            <td>${camp[0]}</td>
-                            <td>${camp[1]}</td>
-                            <td>${camp[2]}</td>
-                            <td>${camp[3]}</td>
-                            <td>${camp[4]}</td>
-                            <td>${camp[5]}</td>
-                            <td>${camp[6]}</td>
-                            <td>${camp[7]}</td>
-                            <td>${camp[8] ? `<a href="${camp[8].startsWith("https") ? camp[8] : "https://" + camp[8]}" target="_blank">Visit</a>` : "N/A"}</td>
-                        </tr>
-                    `)
-                    .join("")}
+                    ${campData
+                        .map(camp => `
+                            <tr>
+                                <td>${camp[0]}</td>
+                                <td>${camp[1]}</td>
+                                <td>${camp[2]}</td>
+                                <td>${camp[3]}</td>
+                                <td>${camp[4]}</td>
+                                <td>${camp[5]}</td>
+                                <td>${camp[6]}</td>
+                                <td>${camp[8]}</td> <!-- Added State Column -->
+                                <td>${camp[7] ? `<a href="${camp[7].startsWith("http") ? camp[7] : "https://" + camp[7]}" target="_blank">Visit</a>` : "N/A"}</td>
+                            </tr>
+                        `)
+                        .join("")}
                 </tbody>
-            `;
-
-            section.appendChild(table);
-            container.appendChild(section);
-        });
+            </table>
+        `;
 
     } catch (error) {
         console.error("Error loading data:", error);
