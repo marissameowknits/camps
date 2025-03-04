@@ -7,47 +7,65 @@
   <style>
     body { 
       font-family: Arial, sans-serif; 
-      margin: 20px; 
-      background-color: #f8f9fa; 
-      color: #333; 
-      text-align: center; 
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0055a5, #003f7f);
+      color: #fff;
+      text-align: center;
       position: fixed;
       width: 100%;
       height: 100%;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-    h1 { color: #0055a5; }
-    .search-container { margin-bottom: 20px; }
+    h1 {
+      color: #fff;
+      margin-bottom: 10px;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .search-container {
+      margin-bottom: 20px;
+    }
     input[type="text"] {
       width: 50%;
-      padding: 10px;
+      padding: 12px;
       font-size: 16px;
-      border: 1px solid #ccc;
+      border: none;
       border-radius: 5px;
+      outline: none;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     }
-    /* Scrollable container for the table */
     #campContainer {
-      max-height: 80vh; /* 80% of viewport height */
+      max-height: 70vh;
       overflow-y: auto;
-      margin: 0 auto;
+      width: 90%;
+      background: #fff;
+      color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     }
     table {
       width: 100%;
       border-collapse: collapse;
       background-color: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     th, td {
       padding: 12px;
       text-align: left;
       border-bottom: 1px solid #ddd;
     }
-    th { background-color: #0055a5; color: white; }
+    th {
+      background-color: #0055a5;
+      color: white;
+    }
     tr:nth-child(even) { background-color: #f2f2f2; }
     tr:hover { background-color: #e1f5fe; }
-    a { color: #007bff; text-decoration: none; }
+    a { color: #0055a5; text-decoration: none; }
     a:hover { text-decoration: underline; }
     @media (max-width: 768px) {
       input[type="text"] { width: 80%; }
