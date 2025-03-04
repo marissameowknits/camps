@@ -1,119 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camp List</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f8f9fa; color: #333; text-align: center; }
-        h1 { color: #0055a5; }
-        .search-container { margin-bottom: 20px; }
-        input[type="text"] { width: 50%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; }
-        .camp-section { max-width: 1200px; margin: 20px auto; text-align: left; }
-        .camp-section h2 { background-color: #0055a5; color: white; padding: 10px; border-radius: 5px; }
-        table { width: 100%; border-collapse: collapse; background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background-color: #0055a5; color: white; }
-        tr:nth-child(even) { background-color: #f2f2f2; }
-        tr:hover { background-color: #e1f5fe; }
-        a { color: #007bff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        @media (max-width: 768px) { input[type="text"] { width: 80%; } table { font-size: 14px; } th, td { padding: 8px; } }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camp List</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 20px; 
+      background-color: #f8f9fa; 
+      color: #333; 
+      text-align: center; 
+    }
+    h1 { color: #0055a5; }
+    .search-container { margin-bottom: 20px; }
+    input[type="text"] {
+      width: 50%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    table {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th { background-color: #0055a5; color: white; }
+    tr:nth-child(even) { background-color: #f2f2f2; }
+    tr:hover { background-color: #e1f5fe; }
+    a { color: #007bff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      input[type="text"] { width: 80%; }
+      table { font-size: 14px; }
+      th, td { padding: 8px; }
+    }
+  </style>
 </head>
 <body>
-
-    <h1>Camp List</h1>
-    
-    <div class="search-container">
-        <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
-    </div>
-
-    <div id="campContainer"></div>
-
-    <script>
-        async function loadCamps() {
-            const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";  
-            const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
-
-            try {
-                const response = await fetch(url);
-                const text = await response.text();
-                const json = JSON.parse(text.substring(47, text.length - 2));
-
-                const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : ""))); 
-                console.log("Loaded Camp Data:", campData);
-
-                const states = {};
-
-                // Group camps by state
-                campData.forEach(camp => {
-                    const state = camp[8] ? camp[8].trim() : "Other";  
-                    if (!states[state]) states[state] = [];
-                    states[state].push(camp);
-                });
-
-                const container = document.getElementById("campContainer");
-                container.innerHTML = "";
-
-                Object.keys(states).forEach(state => {
-                    const section = document.createElement("div");
-                    section.className = "camp-section";
-                    section.innerHTML = `<h2>${state} Camps</h2>`;
-
-                    const table = document.createElement("table");
-                    table.innerHTML = `
-                        <thead>
-                            <tr>
-                                <th>Camp Name</th>
-                                <th>Dates</th>
-                                <th>Location</th>
-                                <th>Description</th>
-                                <th>Type</th>
-                                <th>CODA Allowed</th>
-                                <th>Cost</th>
-                                <th>Website</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        ${states[state]
-                            .map(camp => `
-                                <tr>
-                                    <td>${camp[0]}</td>
-                                    <td>${camp[1]}</td>
-                                    <td>${camp[2]}</td>
-                                    <td>${camp[3]}</td>
-                                    <td>${camp[4]}</td>
-                                    <td>${camp[5]}</td>
-                                    <td>${camp[6]}</td>
-                                    <td>${camp[7] ? `<a href="${camp[7]}" target="_blank">Visit</a>` : "N/A"}</td>
-                                </tr>
-                            `)
-                            .join("")}
-                        </tbody>
-                    `;
-
-                    section.appendChild(table);
-                    container.appendChild(section);
-                });
-
-            } catch (error) {
-                console.error("Error loading data:", error);
-            }
+  <h1>Camp List</h1>
+  <div class="search-container">
+    <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
+  </div>
+  <div id="campContainer"></div>
+  <script>
+    async function loadCamps() {
+      const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";  
+      const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
+        const text = await response.text();
+        const json = JSON.parse(text.substring(47, text.length - 2));
+        // Map each row to an array of cell values; if a cell is missing, use an empty string.
+        const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
+        console.log("Loaded Camp Data:", campData); // Debug: Check data in console
 
-        function searchCamps() {
-            const input = document.getElementById("searchBox").value.toLowerCase();
-            const rows = document.querySelectorAll("#campContainer table tbody tr");
-
-            rows.forEach(row => {
-                const text = row.innerText.toLowerCase();
-                row.style.display = text.includes(input) ? "" : "none";
-            });
-        }
-
-        loadCamps();
-    </script>
-
-</body>
-</html>
+        // Build a single table with all camps; we assume the following column order:
+        // 0: Camp Name, 1: State, 2: Dates, 3: Location, 4: Description, 
+        // 5: Type, 6: CODA Allowed, 7: Cost, 8: Website
+        const container = document.getElementById("campContainer");
+        container.innerHTML = `
+          <table>
+            <thead>
+              <tr>
+                <th>Camp Name</th>
+                <th>State</th>
+                <th>Dates</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>CODA Allowed</th>
+                <th>Cost</th>
+                <th>Website</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${campData.map(camp => `
+                <tr>
+                  <td>${camp[0]}</td>
+                  <td>${camp[1]}</td>
+                  <td>${camp[2]}</td>
+                  <td>${camp[3]}</td>
+                  <td>${camp[4]}</td>
+                  <td>${camp[5]}</td>
+                  <td>${camp[6]}</td>
+                  <td>${camp[7]}</td>
+                  <td>${camp[8] ? `<a href="${camp[8].startsWith("http") ? camp[8] : "https://" + camp[8]}" target="_blank">Visit</a>` : "N/A"}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+      } catch (error) {
+        console.error("Err
