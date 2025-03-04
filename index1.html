@@ -65,6 +65,20 @@
       transform: scale(1.08);
       box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
     }
+    .camp-card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #004d99;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .camp-card a:hover {
+      background: #002b5e;
+    }
   </style>
 </head>
 <body>
@@ -108,6 +122,7 @@
           <p><i class="fas fa-users"></i> Type: ${camp[6]}</p>
           <p><i class="fas fa-check-circle"></i> CODA Allowed: ${camp[7]}</p>
           <p><i class="fas fa-dollar-sign"></i> Cost: ${camp[8]}</p>
+          ${camp[9] !== "N/A" ? `<a href="${camp[9].startsWith('http') ? camp[9] : 'https://' + camp[9]}" target="_blank">Visit Website</a>` : ""}
         </div>
       `).join("");
     }
