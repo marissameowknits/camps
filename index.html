@@ -78,6 +78,22 @@
       text-decoration: none;
       font-weight: bold;
     }
+    .pagination {
+      margin-top: 20px;
+    }
+    .pagination button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      background: #0055a5;
+      color: white;
+      cursor: pointer;
+    }
+    .pagination button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
   </style>
 </head>
 <body>
@@ -105,55 +121,54 @@
   </div>
 
   <div class="camp-list" id="campContainer"></div>
+  <div class="pagination">
+    <button id="prevPage" onclick="changePage(-1)" disabled>Previous</button>
+    <button id="nextPage" onclick="changePage(1)" disabled>Next</button>
+  </div>
 
   <script>
-    document.getElementById("campForm").addEventListener("submit", async function(event) {
-      event.preventDefault();
-
-      const formData = {
-        name: document.getElementById("name").value,
-        location: document.getElementById("location").value,
-        date: document.getElementById("date").value,
-        description: document.getElementById("description").value,
-        website: document.getElementById("website").value
-      };
-
-      const response = await fetch("https://script.google.com/macros/s/AKfycbyEbUtSloIsGyJrBVrynwJsF8PmzmCBt1irSdCqMTxAJ4P6uQ5znwNh8k7H2M6aBwX83w/exec", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      });
-
-      if (response.ok) {
-        document.getElementById("responseMessage").innerText = "Form submitted successfully!";
-        document.getElementById("campForm").reset();
-        fetchCamps();
-      } else {
-        document.getElementById("responseMessage").innerText = "Error submitting form.";
-      }
-    });
+    let campsData = [];
+    let currentPage = 1;
+    const itemsPerPage = 6;
 
     async function fetchCamps() {
       const response = await fetch("https://script.google.com/macros/s/AKfycbyEbUtSloIsGyJrBVrynwJsF8PmzmCBt1irSdCqMTxAJ4P6uQ5znwNh8k7H2M6aBwX83w/exec");
-      const camps = await response.json();
+      campsData = await response.json();
+      displayCamps();
+    }
+
+    function displayCamps() {
       const container = document.getElementById("campContainer");
-      container.innerHTML = camps.map(camp => `
-        <div class="camp-card">
-          <h3>${camp.name}</h3>
-          <p><strong>Location:</strong> ${camp.location}</p>
-          <p><strong>Date:</strong> ${camp.date}</p>
-          <p>${camp.description}</p>
-          ${camp.website ? `<a href="${camp.website}" target="_blank">Visit Website</a>` : ""}
-        </div>
-      `).join("");
+      container.innerHTML = "";
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const paginatedCamps = campsData.slice(start, end);
+      
+      paginatedCamps.forEach(camp => {
+        container.innerHTML += `
+          <div class="camp-card">
+            <h3>${camp.name}</h3>
+            <p><strong>Location:</strong> ${camp.location}</p>
+            <p><strong>Date:</strong> ${camp.date}</p>
+            <p>${camp.description}</p>
+            ${camp.website ? `<a href="${camp.website}" target="_blank">Visit Website</a>` : ""}
+          </div>
+        `;
+      });
+      
+      document.getElementById("prevPage").disabled = currentPage === 1;
+      document.getElementById("nextPage").disabled = end >= campsData.length;
+    }
+
+    function changePage(direction) {
+      currentPage += direction;
+      displayCamps();
     }
 
     function searchCamps() {
       const input = document.getElementById("searchBox").value.toLowerCase();
-      const cards = document.querySelectorAll(".camp-card");
-      cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(input) ? "block" : "none";
+      document.querySelectorAll(".camp-card").forEach(card => {
+        card.style.display = card.innerText.toLowerCase().includes(input) ? "block" : "none";
       });
     }
 
