@@ -106,4 +106,20 @@
           </table>
         `;
       } catch (error) {
-        console.error("Err
+        console.error("Error loading data:", error);
+      }
+    }
+
+    function searchCamps() {
+      const input = document.getElementById("searchBox").value.toLowerCase();
+      const rows = document.querySelectorAll("#campContainer table tbody tr");
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(input) ? "" : "none";
+      });
+    }
+
+    loadCamps();
+  </script>
+</body>
+</html>
