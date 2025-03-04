@@ -83,16 +83,12 @@
         const response = await fetch(url);
         if (!response.ok) throw new Error('Failed to load data');
         const text = await response.text();
-        console.log("Raw Google Sheets Response:", text);
-        
         const json = JSON.parse(text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1));
-        console.log("Parsed JSON:", json);
 
-        const campData = json.table.rows.map(row =>
-          row.c.map(cell => (cell && cell.v !== undefined ? cell.v : "N/A"))
-        );
-        console.log("Extracted Camp Data:", campData);
-        
+        const campData = json.table.rows.map(row => {
+          return row.c.map(cell => (cell && cell.v !== undefined ? cell.v : "N/A"));
+        });
+
         displayCamps(campData);
       } catch (error) {
         console.error("Error loading data:", error);
