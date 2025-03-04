@@ -85,7 +85,7 @@
         const text = await response.text();
         const json = JSON.parse(text.substring(47, text.length - 2));
         const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
-        displayCamps(campData);
+        displayCamps(campData); 
       } catch (error) {
         console.error("Error loading data:", error);
         document.getElementById("campContainer").innerHTML = "<p>Failed to load camp data.</p>";
