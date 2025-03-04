@@ -44,59 +44,57 @@
       box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.7);
       text-align: center;
     }
-    /* Modified container: using column layout for rows */
+    /* Container with rows */
     #campContainer {
       max-height: 75vh;
       overflow-y: auto;
       width: 90%;
       margin-top: 130px;
       display: flex;
-      flex-direction: column; /* arrange items in a column */
-      align-items: center;    /* center each card horizontally */
-      gap: 35px;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
       padding-bottom: 35px;
     }
+    /* Row styling (no card look) */
     .camp-card {
-      background: rgba(255, 255, 255, 0.98);
-      color: #333;
-      width: 90%;
-      max-width: 450px;
-      padding: 45px;
-      border-radius: 40px;
-      box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.8);
+      background: transparent;
+      color: #fff;
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       text-align: left;
-      transition: transform 0.5s, box-shadow 0.5s;
-      border-left: 14px solid #0099ff;
+      transition: background 0.3s;
     }
     .camp-card:hover {
-      transform: scale(1.18);
-      box-shadow: 0px 22px 44px rgba(0, 0, 0, 0.9);
+      background: rgba(255, 255, 255, 0.1);
     }
     .camp-card h3 {
-      margin: 0 0 16px 0;
+      margin: 0 0 8px 0;
       color: #0099ff;
-      font-size: 32px;
-      font-weight: 900;
+      font-size: 28px;
+      font-weight: 700;
     }
     .camp-card p {
-      font-size: 19px;
-      margin: 12px 0;
-      line-height: 2.2;
+      font-size: 16px;
+      margin: 8px 0;
+      line-height: 1.6;
     }
     .camp-card a {
       display: inline-block;
-      margin-top: 22px;
-      padding: 20px 28px;
+      margin-top: 10px;
+      padding: 10px 16px;
       background: linear-gradient(135deg, #0099ff, #002a4a);
       color: #fff;
-      border-radius: 18px;
+      border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
       transition: background 0.3s, transform 0.3s;
     }
     .camp-card a:hover {
       background: linear-gradient(135deg, #007acc, #001f3a);
-      transform: translateY(-6px);
+      transform: translateY(-3px);
     }
     #loading {
       margin-top: 150px;
