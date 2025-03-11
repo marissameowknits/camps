@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camp List</title>
+  <link rel="icon" type="image/svg+xml" href="https://clerccenter.gallaudet.edu/wp-content/uploads/2020/04/ClercCenter2024.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
@@ -181,6 +182,18 @@
   </footer>
 
   <script>
+    // This function formats the URL:
+    // - Returns "#" if no link is provided.
+    // - Prepends "https://" if the URL doesn't start with "http" or "https".
+    function formatLink(link) {
+      if (!link || link.trim() === "") return "#";
+      link = link.trim();
+      if (!link.startsWith("http://") && !link.startsWith("https://")) {
+        link = "https://" + link;
+      }
+      return link;
+    }
+
     async function fetchCamps() {
       document.getElementById("loading").style.display = "block";
       document.getElementById("errorMessage").style.display = "none";
@@ -207,7 +220,7 @@
       // Group camps by state (assuming state is at index 3)
       const groups = {};
       camps.forEach(camp => {
-        const state = camp[1] || "Unknown";
+        const state = camp[3] || "Unknown";
         if (!groups[state]) {
           groups[state] = [];
         }
@@ -231,7 +244,8 @@
                 <p>👥 Type: ${camp[5]}</p>
                 <p>✅ CODA Allowed: ${camp[6]}</p>
                 <p>💲 Cost: ${camp[7]}</p>
-                 <a href="${formatLink(camp[8])}" target="_blank">Visit Website</a>
+                <!-- Change the index below to [8] if your links are in the 9th column -->
+                <a href="${camp[8] ? formatLink(camp[8]) : '#'}" target="_blank">Visit Website</a>
               </div>
             `).join('')}
           </div>
@@ -239,7 +253,7 @@
       `).join('');
     }
 
-    // Example search functionality (you can expand this as needed)
+    // Basic search functionality
     function searchCamps() {
       const query = document.getElementById("searchBox").value.toLowerCase();
       const campCards = document.querySelectorAll(".camp-card");
