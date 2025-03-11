@@ -220,7 +220,7 @@
       // Group camps by state (assuming state is at index 3)
       const groups = {};
       camps.forEach(camp => {
-        const state = camp[3] || "Unknown";
+        const state = camp[1] || "Unknown";
         if (!groups[state]) {
           groups[state] = [];
         }
