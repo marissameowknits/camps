@@ -27,11 +27,21 @@
       top: 0;
       left: 0;
       display: flex;
+      align-items: center;
       justify-content: center;
       backdrop-filter: blur(15px);
       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
       border-bottom: 3px solid #0099ff;
       z-index: 1000;
+    }
+    .navbar a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .navbar img {
+      height: 40px;
+      margin-right: 20px;
     }
     input[type="text"] {
       width: 80%;
@@ -150,11 +160,13 @@
 <body>
 
   <div class="navbar">
+    <a href="https://clerccenter.gallaudet.edu/" target="_blank">
+      <img src="https://clerccenter.gallaudet.edu/wp-content/uploads/2020/04/ClercCenter2024.svg" alt="Clerc Center Logo">
+    </a>
     <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
   </div>
 
   <header>
-    <img src="https://clerccenter.gallaudet.edu/wp-content/uploads/2020/04/ClercCenter2024.svg" alt="Clerc Center Logo">
     <h1>Camp List</h1>
     <p>Your guide to summer camps</p>
   </header>
