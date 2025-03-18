@@ -4,199 +4,91 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camp List</title>
-  <link rel="icon" type="image/svg+xml" href="https://clerccenter.gallaudet.edu/wp-content/uploads/2020/04/ClercCenter2024.svg">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
-    
-    body { 
-      font-family: 'Poppins', sans-serif; 
-      margin: 0;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
       padding: 0;
-      background: linear-gradient(135deg, #001f4d, #000a1a);
-      color: #fff;
+      color: #000;
+      background: #fff;
+    }
+    h1 {
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      color: #333;
     }
-    .navbar {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(15px);
-      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
-      border-bottom: 3px solid #0099ff;
-      z-index: 1000;
-    }
-    .navbar a {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
-    .navbar img {
-      height: 40px;
-      margin-right: 20px;
+    .container {
+      width: 90%;
+      margin: auto;
     }
     input[type="text"] {
-      width: 80%;
-      max-width: 480px;
-      padding: 16px;
-      font-size: 20px;
-      border: none;
-      border-radius: 35px;
-      outline: none;
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.7);
-      text-align: center;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border: 1px solid #ddd;
     }
-    /* Header styling */
-    header {
-      margin-top: 100px; /* spacing below fixed navbar */
-      padding: 20px;
-    }
-    header h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-      color: #0099ff;
-    }
-    header p {
-      font-size: 18px;
-      margin: 0;
-    }
-    /* Container for state groups */
-    #campContainer {
-      flex: 1;
-      width: 90%;
-      margin: 20px auto;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      padding-bottom: 35px;
-    }
-    /* State group styling */
     .state-group {
-      text-align: left;
+      margin-bottom: 30px;
     }
     .state-group h2 {
-      font-size: 32px;
-      color: #0099ff;
-      margin-bottom: 20px;
+      background: #f4f4f4;
+      padding: 10px;
+      border: 1px solid #ddd;
     }
-    .state-camps {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    /* Camp card styling */
-    .camp-card {
-      background: transparent;
-      color: #fff;
-      padding: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: background 0.3s;
-    }
-    .camp-card:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-    .camp-card h3 {
-      margin: 0 0 8px 0;
-      color: #0099ff;
-      font-size: 28px;
-      font-weight: 700;
-    }
-    .camp-card p {
-      font-size: 16px;
-      margin: 8px 0;
-      line-height: 1.6;
-    }
-    .camp-card a {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 16px;
-      background: linear-gradient(135deg, #0099ff, #002a4a);
-      color: #fff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .camp-card a:hover {
-      background: linear-gradient(135deg, #007acc, #001f3a);
-      transform: translateY(-3px);
-    }
-    #loading {
-      margin-top: 150px;
-      font-size: 30px;
-      font-weight: bold;
-      color: #fff;
-      animation: fadein 1.5s infinite alternate;
-    }
-    @keyframes fadein {
-      from { opacity: 0.6; }
-      to { opacity: 1; }
-    }
-    #errorMessage {
-      display: none;
-      color: #ff4d4d;
-      margin-top: 26px;
-      font-weight: bold;
-    }
-    /* Footer styling */
-    footer {
-      background: rgba(0, 0, 0, 0.7);
+    table {
       width: 100%;
-      padding: 20px;
-      text-align: center;
-      font-size: 16px;
-      border-top: 3px solid #0099ff;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #e0e0e0;
+      font-weight: bold;
+    }
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    @media print {
+      body {
+        background: none;
+      }
+      table {
+        border: 1px solid #000;
+      }
+    }
+    @media screen and (max-width: 768px) {
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      th, td {
+        padding: 8px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="navbar">
-    <a href="https://clerccenter.gallaudet.edu/" target="_blank">
-      <img src="https://clerccenter.gallaudet.edu/wp-content/uploads/2020/04/ClercCenter2024.svg" alt="Clerc Center Logo">
-    </a>
-    <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
+  <div class="container">
+    <h1>Camp List</h1>
+    <input type="text" id="searchBox" placeholder="Search by camp name, state, or keyword..." onkeyup="searchCamps()">
+    <div id="campContainer"></div>
   </div>
 
-  <header>
-    <h1>Camp List</h1>
-    <p>Your guide to summer camps</p>
-  </header>
-  
-  <div id="loading">Loading camps...</div>
-  <p id="errorMessage">Failed to load camp data. <button onclick="fetchCamps()">Retry</button></p>
-  
-  <div id="campContainer"></div>
-
-  <footer>
-    &copy; Clerc Center Summer 2025 Camp List. All rights reserved.
-  </footer>
-
   <script>
-    // This function formats the URL:
-    // - Returns "#" if no link is provided.
-    // - Prepends "https://" if the URL doesn't start with "http" or "https".
-    function formatLink(link) {
-      if (!link || link.trim() === "") return "#";
-      link = link.trim();
-      if (!link.startsWith("http://") && !link.startsWith("https://")) {
-        link = "https://" + link;
-      }
-      return link;
-    }
-
     async function fetchCamps() {
-      document.getElementById("loading").style.display = "block";
-      document.getElementById("errorMessage").style.display = "none";
       try {
         const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";
         const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&tq=&gid=0`;
@@ -209,15 +101,11 @@
         displayCamps(campData);
       } catch (error) {
         console.error("Error loading data:", error);
-        document.getElementById("errorMessage").style.display = "block";
-      } finally {
-        document.getElementById("loading").style.display = "none";
       }
     }
 
     function displayCamps(camps) {
       const container = document.getElementById("campContainer");
-      // Group camps by state (assuming state is at index 3)
       const groups = {};
       camps.forEach(camp => {
         const state = camp[1] || "Unknown";
@@ -226,44 +114,59 @@
         }
         groups[state].push(camp);
       });
-
-      // Sort states alphabetically
       const sortedStates = Object.keys(groups).sort();
-
       container.innerHTML = sortedStates.map(state => `
         <div class="state-group">
           <h2>${state}</h2>
-          <div class="state-camps">
-            ${groups[state].map(camp => `
-              <div class="camp-card">
-                <h3>${camp[0]}</h3>
-                <p>📍 ${camp[1]}</p>
-                <p>📅 ${camp[2]}</p>
-                <p>📍 ${camp[3]}</p>
-                <p>ℹ️ ${camp[4]}</p>
-                <p>👥 Type: ${camp[5]}</p>
-                <p>✅ CODA Allowed: ${camp[6]}</p>
-                <p>💲 Cost: ${camp[7]}</p>
-                <!-- Change the index below to [8] if your links are in the 9th column -->
-                <a href="${camp[8] ? formatLink(camp[8]) : '#'}" target="_blank">Visit Website</a>
-              </div>
-            `).join('')}
-          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Camp Name</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Details</th>
+                <th>Type</th>
+                <th>CODA Allowed</th>
+                <th>Cost</th>
+                <th>More Info</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${groups[state].map(camp => `
+                <tr>
+                  <td>${camp[0]}</td>
+                  <td>${camp[1]}</td>
+                  <td>${camp[2]}</td>
+                  <td>${camp[4]}</td>
+                  <td>${camp[5]}</td>
+                  <td>${camp[6]}</td>
+                  <td>${camp[7]}</td>
+                  <td><a href="${camp[8] ? camp[8] : '#'}" target="_blank">More Info</a></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
         </div>
       `).join('');
     }
 
-    // Basic search functionality
     function searchCamps() {
       const query = document.getElementById("searchBox").value.toLowerCase();
-      const campCards = document.querySelectorAll(".camp-card");
-      campCards.forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(query) ? "block" : "none";
+      document.querySelectorAll(".state-group").forEach(group => {
+        let hasMatch = false;
+        group.querySelectorAll("tr").forEach(row => {
+          if (row.innerText.toLowerCase().includes(query)) {
+            row.style.display = "";
+            hasMatch = true;
+          } else {
+            row.style.display = "none";
+          }
+        });
+        group.style.display = hasMatch ? "block" : "none";
       });
     }
 
     fetchCamps();
   </script>
-
 </body>
 </html>
