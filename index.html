@@ -189,15 +189,7 @@
     function searchCamps() {
       const query = document.getElementById("searchBox").value.toLowerCase();
       document.querySelectorAll(".state-group").forEach(group => {
-        let hasMatch = false;
-        group.querySelectorAll("tr").forEach(row => {
-          if (row.innerText.toLowerCase().includes(query)) {
-            row.style.display = "";
-            hasMatch = true;
-          } else {
-            row.style.display = "none";
-          }
-        });
+        let hasMatch = group.innerText.toLowerCase().includes(query);
         group.style.display = hasMatch ? "block" : "none";
       });
     }
@@ -206,3 +198,4 @@
   </script>
 </body>
 </html>
+
