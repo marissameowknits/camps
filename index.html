@@ -4,17 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camp List</title>
+  <link rel="icon" type="image/svg+xml" href="https://clerccenter.gallaudet.edu/wp-content/uploads/2020/04/ClercCenter2024.svg">
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
+      margin: 0;
       padding: 0;
       color: #000;
       background: #fff;
     }
+    .navbar {
+      width: 100%;
+      background: #004080;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .navbar a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .navbar img {
+      height: 40px;
+      margin-right: 20px;
+    }
     h1 {
       text-align: center;
-      color: #333;
+      color: #004080;
+      margin-top: 20px;
     }
     .container {
       width: 90%;
@@ -23,9 +43,10 @@
     input[type="text"] {
       width: 100%;
       padding: 10px;
-      margin-bottom: 20px;
+      margin: 20px 0;
       font-size: 16px;
       border: 1px solid #ddd;
+      text-align: center;
     }
     .state-group {
       margin-bottom: 30px;
@@ -46,8 +67,8 @@
       text-align: left;
     }
     th {
-      background: #e0e0e0;
-      font-weight: bold;
+      background: #004080;
+      color: #fff;
     }
     tr:nth-child(even) {
       background: #f9f9f9;
@@ -59,13 +80,12 @@
     a:hover {
       text-decoration: underline;
     }
-    @media print {
-      body {
-        background: none;
-      }
-      table {
-        border: 1px solid #000;
-      }
+    footer {
+      background: #004080;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
     }
     @media screen and (max-width: 768px) {
       table {
@@ -73,19 +93,26 @@
         overflow-x: auto;
         white-space: nowrap;
       }
-      th, td {
-        padding: 8px;
-      }
     }
   </style>
 </head>
 <body>
+
+  <div class="navbar">
+    <a href="https://clerccenter.gallaudet.edu/" target="_blank">
+      <img src="https://clerccenter.gallaudet.edu/wp-content/uploads/2020/04/ClercCenter2024.svg" alt="Clerc Center Logo">
+    </a>
+  </div>
 
   <div class="container">
     <h1>Camp List</h1>
     <input type="text" id="searchBox" placeholder="Search by camp name, state, or keyword..." onkeyup="searchCamps()">
     <div id="campContainer"></div>
   </div>
+
+  <footer>
+    &copy; Clerc Center Summer 2025 Camp List. All rights reserved.
+  </footer>
 
   <script>
     function formatLink(link) {
