@@ -88,6 +88,15 @@
   </div>
 
   <script>
+    function formatLink(link) {
+      if (!link || link.trim() === "") return "#";
+      link = link.trim();
+      if (!link.startsWith("http://") && !link.startsWith("https://")) {
+        link = "https://" + link;
+      }
+      return link;
+    }
+
     async function fetchCamps() {
       try {
         const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";
@@ -141,7 +150,7 @@
                   <td>${camp[5]}</td>
                   <td>${camp[6]}</td>
                   <td>${camp[7]}</td>
-                   <td> <a href="${camp[9] ? formatLink(camp[9]) : '#'}" target="_blank">Visit Website</a></td>
+                  <td><a href="${formatLink(camp[8])}" target="_blank">More Info</a></td>
                 </tr>
               `).join('')}
             </tbody>
