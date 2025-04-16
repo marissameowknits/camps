@@ -187,13 +187,11 @@
     }
 
     function searchCamps() {
-      group.querySelectorAll("tbody tr").forEach(row => {
-  const rowText = row.innerText.toLowerCase();
-  const match = rowText.includes(query);
-  row.style.display = match ? "" : "none";
-
-  if (match) anyRowVisible = true;
-});
+          const query = document.getElementById("searchBox").value.toLowerCase();
+       document.querySelectorAll(".state-group").forEach(group => {
+         let hasMatch = group.innerText.toLowerCase().includes(query);
+         group.style.display = hasMatch ? "block" : "none";
+       });
 
 group.style.display = anyRowVisible ? "block" : "none";
     }
