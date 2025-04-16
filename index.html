@@ -144,7 +144,7 @@
       const container = document.getElementById("campContainer");
       const groups = {};
       camps.forEach(camp => {
-        const state = camp[1] || "Unknown";
+        const state = camp[8] || "Unknown";
         if (!groups[state]) {
           groups[state] = [];
         }
