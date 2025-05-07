@@ -1,170 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Camp List</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Summer Camp/Program List</title>
+  <link rel="icon" href="https://clerccenter.gallaudet.edu/wp-content/uploads/2020/04/ClercCenter2024.svg" type="image/svg+xml" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
-    
-    body { 
-      font-family: 'Poppins', sans-serif; 
+    :root {
+      --main-color: #004080;
+      --accent-color: #0066cc;
+      --background-color: #fff;
+      --text-color: #000;
+      --header-bg: #f4f4f4;
+      --even-row: #f9f9f9;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #001f4d, #000a1a);
-      color: #fff;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+      background: var(--background-color);
+      color: var(--text-color);
     }
+
     .navbar {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      position: fixed;
-      top: 0;
-      left: 0;
+      background: var(--main-color);
+      padding: 10px 15px;
       display: flex;
-      justify-content: center;
-      backdrop-filter: blur(15px);
-      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
-      border-bottom: 3px solid #0099ff;
-    }
-    input[type="text"] {
-      width: 80%;
-      max-width: 480px;
-      padding: 16px;
-      font-size: 20px;
-      border: none;
-      border-radius: 35px;
-      outline: none;
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.7);
-      text-align: center;
-    }
-    /* Container with rows */
-    #campContainer {
-      max-height: 75vh;
-      overflow-y: auto;
-      width: 90%;
-      margin-top: 130px;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 20px;
-      padding-bottom: 35px;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    /* Row styling (no card look) */
-    .camp-card {
-      background: transparent;
-      color: #fff;
+
+    .navbar img {
+      height: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--main-color);
+      margin: 20px 0 10px;
+    }
+
+    .container {
+      padding: 0 5%;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    #searchBox {
       width: 100%;
-      max-width: 800px;
-      padding: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      text-align: left;
-      transition: background 0.3s;
-    }
-    .camp-card:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-    .camp-card h3 {
-      margin: 0 0 8px 0;
-      color: #0099ff;
-      font-size: 28px;
-      font-weight: 700;
-    }
-    .camp-card p {
+      padding: 12px;
+      margin: 15px 0 25px;
       font-size: 16px;
-      margin: 8px 0;
-      line-height: 1.6;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
     }
-    .camp-card a {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 16px;
-      background: linear-gradient(135deg, #0099ff, #002a4a);
+
+    .state-group {
+      margin-bottom: 30px;
+    }
+
+    .state-group h2 {
+      background: var(--header-bg);
+      padding: 10px;
+      border-left: 5px solid var(--main-color);
+      margin-bottom: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      overflow-x: auto;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: var(--main-color);
       color: #fff;
-      border-radius: 8px;
+    }
+
+    tr:nth-child(even) {
+      background: var(--even-row);
+    }
+
+    a {
+      color: var(--accent-color);
       text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s, transform 0.3s;
     }
-    .camp-card a:hover {
-      background: linear-gradient(135deg, #007acc, #001f3a);
-      transform: translateY(-3px);
+
+    a:hover {
+      text-decoration: underline;
     }
-    #loading {
-      margin-top: 150px;
-      font-size: 30px;
-      font-weight: bold;
+
+    footer {
+      background: var(--main-color);
       color: #fff;
-      animation: fadein 1.5s infinite alternate;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
     }
-    @keyframes fadein {
-      from { opacity: 0.6; }
-      to { opacity: 1; }
+
+    @media screen and (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        background: #fefefe;
+        border-radius: 6px;
+      }
+
+      td {
+        padding: 5px 10px;
+        position: relative;
+      }
+
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        color: #555;
+        margin-bottom: 3px;
+      }
     }
-    #errorMessage {
-      display: none;
-      color: #ff4d4d;
-      margin-top: 26px;
-      font-weight: bold;
+
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      .navbar, #searchBox, footer {
+        display: none;
+      }
+
+      .container {
+        padding: 0;
+        margin: 0;
+      }
+
+      table {
+        font-size: 12px;
+      }
+
+      th {
+        background: #ccc !important;
+        color: #000 !important;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
     }
   </style>
 </head>
 <body>
-
   <div class="navbar">
-    <input type="text" id="searchBox" placeholder="Search camps..." onkeyup="searchCamps()">
+    <a href="https://clerccenter.gallaudet.edu/" target="_blank">
+      <img src="https://clerccenter.gallaudet.edu/wp-content/uploads/2020/04/ClercCenter2024.svg" alt="Clerc Center Logo" />
+    </a>
   </div>
-  
-  <div id="loading">Loading camps...</div>
-  <p id="errorMessage">Failed to load camp data. <button onclick="fetchCamps()">Retry</button></p>
-  
-  <div id="campContainer"></div>
+
+  <div class="container">
+    <h1>Summer Camp List</h1>
+    <input type="text" id="searchBox" placeholder="Search by camp name, state, or keyword..." onkeyup="searchCamps()" />
+    <div id="campContainer"></div>
+  </div>
+
+  <footer>
+    &copy; Clerc Center Summer 2025 Camp List. All rights reserved.
+  </footer>
 
   <script>
+    function formatLink(link) {
+      if (!link || link.trim() === "") return "#";
+      link = link.trim();
+      if (!link.startsWith("http://") && !link.startsWith("https://")) {
+        link = "https://" + link;
+      }
+      return link;
+    }
+
     async function fetchCamps() {
-      document.getElementById("loading").style.display = "block";
-      document.getElementById("errorMessage").style.display = "none";
       try {
         const sheetID = "1x8Owy5G5KszkC-D-lVaZJDVTKDB6-Jdsn_-Xu8M0x6Q";
         const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&tq=&gid=0`;
         const response = await fetch(url);
-        if (!response.ok) throw new Error("Failed to load data");
         const text = await response.text();
-        const jsonStart = text.indexOf("{");
-        const json = JSON.parse(text.substring(jsonStart, text.length - 2));
+        const json = JSON.parse(text.substring(text.indexOf("{"), text.length - 2));
         const campData = json.table.rows.map(row => row.c.map(cell => (cell ? cell.v : "")));
         displayCamps(campData);
       } catch (error) {
-        console.error("Error loading data:", error);
-        document.getElementById("errorMessage").style.display = "block";
-      } finally {
-        document.getElementById("loading").style.display = "none";
+        console.error("Error loading camp data:", error);
       }
     }
+
     function displayCamps(camps) {
       const container = document.getElementById("campContainer");
-      container.innerHTML = camps.map(camp => `
-        <div class="camp-card">
-          <h3>${camp[0]}</h3>
-          <p>📍 ${camp[1]}</p>
-          <p>📅 ${camp[2]}</p>
-          <p>📍 ${camp[3]}</p>
-          <p>ℹ️ ${camp[4]}</p>
-          <p>👥 Type: ${camp[5]}</p>
-          <p>✅ CODA Allowed: ${camp[6]}</p>
-          <p>💲 Cost: ${camp[7]}</p>
-          <a href="${camp[9] ? camp[9] : '#'}" target="_blank">Visit Website</a>
+      const groups = {};
+      camps.forEach(camp => {
+        const state = camp[8] || "Unknown";
+        if (!groups[state]) groups[state] = [];
+        groups[state].push(camp);
+      });
+
+      const sortedStates = Object.keys(groups).sort();
+      container.innerHTML = sortedStates.map(state => `
+        <div class="state-group">
+          <h2>${state}</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Camp Name</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Details</th>
+                <th>Type</th>
+                <th>CODA Allowed</th>
+                <th>Cost</th>
+                <th>Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${groups[state].map(camp => `
+                <tr>
+                  <td data-label="Camp Name">${camp[0]}</td>
+                  <td data-label="Location">${camp[1]}</td>
+                  <td data-label="Date">${camp[2]}</td>
+                  <td data-label="Details">${camp[3]}</td>
+                  <td data-label="Type">${camp[4]}</td>
+                  <td data-label="CODA Allowed">${camp[5]}</td>
+                  <td data-label="Cost">${camp[6]}</td>
+                  <td data-label="Link"><a href="${formatLink(camp[7])}" target="_blank">${camp[0]}</a></td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
         </div>
-      `).join("");
+      `).join('');
     }
+
+    function searchCamps() {
+      const query = document.getElementById("searchBox").value.toLowerCase();
+      document.querySelectorAll(".state-group").forEach(group => {
+        group.style.display = group.innerText.toLowerCase().includes(query) ? "block" : "none";
+      });
+    }
+
     fetchCamps();
   </script>
-
 </body>
 </html>
